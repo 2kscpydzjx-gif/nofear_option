@@ -111,6 +111,27 @@ button,input,select{font:inherit}
 .trade-top{display:flex;justify-content:space-between;gap:10px}.trade-meta{color:#77736c;font-size:12px;margin-top:5px}
 .pending{color:var(--gold2)}
 
+
+.journal-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.journal-field{margin-bottom:10px}.journal-field.full{grid-column:1/-1}
+.journal-field label{display:block;color:#8f887e;font-size:12px;margin-bottom:6px}
+.journal-field input,.journal-field select,.journal-field textarea{width:100%;padding:13px;border-radius:14px;border:1px solid #342a1a;background:#0a0a09;color:#fff;outline:none}
+.journal-field textarea{resize:vertical;min-height:80px}
+.journal-list{display:flex;flex-direction:column;gap:10px}
+.journal-item{padding:14px;border:1px solid #2b2419;border-radius:16px;background:#0d0d0c}
+.journal-top{display:flex;justify-content:space-between;gap:10px}
+.journal-actions{display:flex;gap:8px;margin-top:10px}
+.smallbtn{border:1px solid #3d311e;background:#15110a;color:var(--gold2);padding:8px 11px;border-radius:11px;font-size:12px;cursor:pointer}
+.dangerbtn{color:#ff7777;border-color:#4a2525;background:#160b0b}
+.analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.analytics-card{padding:14px;border:1px solid #2b2419;border-radius:15px;background:#0d0d0c}
+.analytics-card small{display:block;color:#77736c;margin-bottom:5px}.analytics-card b{font-size:20px}
+.equity-chart{height:210px;border-left:1px solid #2a251c;border-bottom:1px solid #2a251c;position:relative;margin-top:16px}
+.equity-chart svg{position:absolute;inset:0;width:100%;height:100%}
+.equity-chart line{stroke:#28231b;stroke-width:1}
+.equity-chart polyline{fill:none;stroke:var(--gold2);stroke-width:4;filter:drop-shadow(0 0 7px rgba(255,211,107,.35))}
+@media(max-width:390px){.journal-form{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -213,6 +234,70 @@ button,input,select{font:inherit}
  <div class="card"><div class="section-title" style="margin-top:0"><span class="accent">▦</span> Разбивка по дням</div><div class="table"><table><thead><tr><th>День</th><th>Нач. баланс</th><th>Прибыль дня</th><th>Кон. баланс</th></tr></thead><tbody id="calcTable"></tbody></table></div></div>
 </section>
 
+
+<section class="page" data-page="journal">
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">☷</span> Покет дневник</div>
+  <div class="muted" style="line-height:1.5;margin-bottom:16px">
+   Добавляйте реальные сделки вручную. Статистика личного кабинета рассчитывается на основе записей этого дневника.
+  </div>
+
+  <div class="journal-form">
+   <div class="journal-field">
+    <label>Валютная пара</label>
+    <select id="journalPair">
+     <option>EUR/USD OTC</option><option>GBP/USD OTC</option><option>AUD/USD OTC</option>
+     <option>EUR/JPY OTC</option><option>GBP/JPY OTC</option><option>AUD/CHF OTC</option>
+     <option>EUR/GBP OTC</option><option>CAD/JPY OTC</option><option>AUD/NZD OTC</option>
+    </select>
+   </div>
+   <div class="journal-field">
+    <label>Направление</label>
+    <select id="journalDirection"><option value="CALL">CALL</option><option value="PUT">PUT</option></select>
+   </div>
+   <div class="journal-field">
+    <label>Сумма сделки, $</label>
+    <input id="journalStake" type="number" min="0.01" step="0.01" placeholder="20">
+   </div>
+   <div class="journal-field">
+    <label>Результат</label>
+    <select id="journalResult"><option value="WIN">WIN</option><option value="LOSS">LOSS</option><option value="DRAW">DRAW</option></select>
+   </div>
+   <div class="journal-field">
+    <label>Payout, %</label>
+    <input id="journalPayout" type="number" min="0" max="100" step="0.1" value="92">
+   </div>
+   <div class="journal-field">
+    <label>Дата и время</label>
+    <input id="journalDate" type="datetime-local">
+   </div>
+   <div class="journal-field full">
+    <label>Комментарий</label>
+    <textarea id="journalComment" placeholder="Почему вошёл, что заметил, ошибка/наблюдение..."></textarea>
+   </div>
+  </div>
+
+  <input id="journalEditId" type="hidden">
+  <button class="primary" id="journalSaveBtn">+ ДОБАВИТЬ СДЕЛКУ</button>
+  <button class="secondary" id="journalCancelBtn" style="display:none;margin-top:9px">ОТМЕНИТЬ РЕДАКТИРОВАНИЕ</button>
+ </div>
+
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">▥</span> Краткая аналитика</div>
+  <div class="analytics-grid">
+   <div class="analytics-card"><small>WIN RATE</small><b id="jWinRate">0%</b></div>
+   <div class="analytics-card"><small>NET P/L</small><b id="jNet">$0.00</b></div>
+   <div class="analytics-card"><small>Сделок</small><b id="jTrades">0</b></div>
+   <div class="analytics-card"><small>Средняя сделка</small><b id="jAvgStake">$0.00</b></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">☷</span> История сделок</div>
+  <div id="journalList" class="journal-list"><div class="muted">Сделок пока нет.</div></div>
+ </div>
+</section>
+
 <section class="page" data-page="profile">
  <div class="auth-state" id="profileAuthState">Подключение Telegram-аккаунта...</div>
 
@@ -271,7 +356,29 @@ button,input,select{font:inherit}
   <div id="tradeHistory" class="trade-list"><div class="muted">Сигналов пока нет.</div></div>
  </div>
 
+ 
  <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">▥</span> Аналитика дневника</div>
+  <div class="analytics-grid">
+   <div class="analytics-card"><small>Gross Profit</small><b class="positive" id="pGrossProfit">$0.00</b></div>
+   <div class="analytics-card"><small>Gross Loss</small><b class="negative" id="pGrossLoss">$0.00</b></div>
+   <div class="analytics-card"><small>Avg WIN</small><b id="pAvgWin">$0.00</b></div>
+   <div class="analytics-card"><small>Avg LOSS</small><b id="pAvgLoss">$0.00</b></div>
+   <div class="analytics-card"><small>Max WIN streak</small><b id="pWinStreak">0</b></div>
+   <div class="analytics-card"><small>Max LOSS streak</small><b id="pLossStreak">0</b></div>
+   <div class="analytics-card"><small>Лучшая пара</small><b id="pBestPair">—</b></div>
+   <div class="analytics-card"><small>Худшая пара</small><b id="pWorstPair">—</b></div>
+  </div>
+  <div class="section-title"><span class="accent">⌁</span> Динамика аккаунта</div>
+  <div class="equity-chart">
+   <svg viewBox="0 0 400 200" preserveAspectRatio="none">
+    <g id="equityGrid"></g>
+    <polyline id="equityLine" points=""></polyline>
+   </svg>
+  </div>
+ </div>
+
+<div class="card">
   <div class="section-title" style="margin-top:0"><span class="accent">▦</span> Движение средств</div>
   <div id="transactionHistory"><div class="muted">Операций пока нет.</div></div>
  </div>
@@ -290,6 +397,7 @@ button,input,select{font:inherit}
   <div class="menuitem" data-go="chat">▢ <span>Веб-чат</span></div>
   <div class="menuitem" data-go="copy">▱ <span>Копирование</span></div>
   <div class="menuitem" data-go="calculator">▦ <span>Калькулятор</span></div>
+  <div class="menuitem" data-go="journal">☷ <span>Дневник</span></div>
   <div class="menuitem" data-go="profile">♙ <span>Личный кабинет</span></div>
  </nav>
 </aside></div>
@@ -299,7 +407,7 @@ button,input,select{font:inherit}
 <div class="modalback" id="modalBack"><div class="modal"><button class="iconbtn closemodal" id="closeModal">×</button><div id="modalContent"></div></div></div>
 
 <script>
-const titles={training:"Обучение",signals:"Сигналы валют",chat:"Веб-чат",copy:"Копирование",calculator:"Калькулятор",profile:"Личный кабинет"};
+const titles={training:"Обучение",signals:"Сигналы валют",chat:"Веб-чат",copy:"Копирование",calculator:"Калькулятор",journal:"Дневник",profile:"Личный кабинет"};
 const pages=[...document.querySelectorAll(".page")], menuItems=[...document.querySelectorAll(".menuitem")];
 const drawer=document.getElementById("drawerBack");
 function go(page){
@@ -546,9 +654,112 @@ function renderVipProfile(payload){
     }).join("");
   }
 
+
+  const a=payload.analytics||{};
+  document.getElementById("pGrossProfit").textContent=money(a.gross_profit||0);
+  document.getElementById("pGrossLoss").textContent="-"+money(a.gross_loss||0);
+  document.getElementById("pAvgWin").textContent=money(a.avg_win||0);
+  document.getElementById("pAvgLoss").textContent="-"+money(a.avg_loss||0);
+  document.getElementById("pWinStreak").textContent=a.max_win_streak||0;
+  document.getElementById("pLossStreak").textContent=a.max_loss_streak||0;
+  document.getElementById("pBestPair").textContent=a.best_pair||"—";
+  document.getElementById("pWorstPair").textContent=a.worst_pair||"—";
+
+  renderEquityCurve(a.equity_curve||[]);
+  renderJournal(payload.journal||[], a);
+
 document.getElementById("profileAuthState").textContent="Telegram-аккаунт подключен • ID "+u.telegram_id;
   document.getElementById("profileAuthState").style.color="var(--green)";
 }
+
+
+function renderEquityCurve(curve){
+  const line=document.getElementById("equityLine"), grid=document.getElementById("equityGrid");
+  if(!line || !grid) return;
+  grid.innerHTML="";
+  for(let i=0;i<5;i++){let y=15+i*43;grid.innerHTML+=`<line x1="0" y1="${y}" x2="400" y2="${y}"></line>`}
+  if(!curve.length){line.setAttribute("points","");return}
+  const vals=curve.map(x=>Number(x.balance||0));
+  const min=Math.min(...vals), max=Math.max(...vals);
+  const pts=vals.map((v,i)=>{
+    const x=vals.length===1?5:(i/(vals.length-1))*390+5;
+    const y=185-((v-min)/(max-min||1))*165;
+    return `${x},${y}`;
+  }).join(" ");
+  line.setAttribute("points",pts);
+}
+
+function renderJournal(journal, analytics){
+  const list=document.getElementById("journalList");
+  if(list){
+    if(!journal.length){
+      list.innerHTML='<div class="muted">Сделок пока нет.</div>';
+    }else{
+      list.innerHTML=journal.map(t=>{
+        const cls=t.result==="WIN"?"positive":t.result==="LOSS"?"negative":"pending";
+        const pnl=Number(t.pnl||0);
+        return `<div class="journal-item">
+          <div class="journal-top">
+           <div><b>${t.pair}</b><div class="trade-meta">${t.direction} • ${new Date(t.traded_at).toLocaleString("ru-RU")}</div></div>
+           <div style="text-align:right"><b class="${cls}">${t.result}</b><div class="trade-meta">${money(pnl,true)}</div></div>
+          </div>
+          <div class="trade-meta">Сумма: ${money(t.stake)} • Payout: ${Number(t.payout_percent||0)}%</div>
+          ${t.comment?`<div style="margin-top:9px;color:#a49e94">${String(t.comment).replace(/[<>]/g,"")}</div>`:""}
+          <div class="journal-actions">
+            <button class="smallbtn" onclick="editJournalTrade(${t.id})">Редактировать</button>
+            <button class="smallbtn dangerbtn" onclick="deleteJournalTrade(${t.id})">Удалить</button>
+          </div>
+        </div>`;
+      }).join("");
+    }
+  }
+
+  if(analytics){
+    const wr=document.getElementById("jWinRate"); if(wr) wr.textContent=Number(analytics.win_rate||0).toFixed(1).replace(".0","")+"%";
+    const net=document.getElementById("jNet"); if(net){net.textContent=money(analytics.net_profit||0,true);net.className=Number(analytics.net_profit||0)>=0?"positive":"negative";}
+    const tr=document.getElementById("jTrades"); if(tr) tr.textContent=analytics.total_trades||0;
+    const av=document.getElementById("jAvgStake"); if(av) av.textContent=money(analytics.avg_stake||0);
+  }
+
+  window.__nofearJournal=journal;
+}
+
+function resetJournalForm(){
+  document.getElementById("journalEditId").value="";
+  document.getElementById("journalStake").value="";
+  document.getElementById("journalComment").value="";
+  document.getElementById("journalPayout").value="92";
+  document.getElementById("journalResult").value="WIN";
+  document.getElementById("journalSaveBtn").textContent="+ ДОБАВИТЬ СДЕЛКУ";
+  document.getElementById("journalCancelBtn").style.display="none";
+}
+
+window.editJournalTrade=function(id){
+  const t=(window.__nofearJournal||[]).find(x=>Number(x.id)===Number(id));
+  if(!t) return;
+  document.getElementById("journalEditId").value=t.id;
+  document.getElementById("journalPair").value=t.pair;
+  document.getElementById("journalDirection").value=t.direction;
+  document.getElementById("journalStake").value=t.stake;
+  document.getElementById("journalResult").value=t.result;
+  document.getElementById("journalPayout").value=t.payout_percent;
+  document.getElementById("journalComment").value=t.comment||"";
+  const d=new Date(t.traded_at); if(!isNaN(d)) document.getElementById("journalDate").value=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16);
+  document.getElementById("journalSaveBtn").textContent="СОХРАНИТЬ ИЗМЕНЕНИЯ";
+  document.getElementById("journalCancelBtn").style.display="block";
+  go("journal");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+window.deleteJournalTrade=async function(id){
+  if(!confirm("Удалить эту сделку из дневника?")) return;
+  try{
+    const r=await fetch(API_URL+"/api/journal/delete",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({init_data:telegramInitData,journal_id:id})});
+    const data=await r.json(); if(!r.ok) throw new Error(data.detail||"Ошибка удаления");
+    renderVipProfile(data); showToast("Сделка удалена");
+  }catch(e){showToast("Ошибка: "+e.message)}
+}
+
 
 async function loadVipProfile(){
   const state=document.getElementById("profileAuthState");
@@ -619,6 +830,37 @@ document.getElementById("saveRiskBtn").addEventListener("click",async()=>{
   }catch(e){
     showToast("Ошибка: "+e.message);
   }
+});
+
+
+
+document.getElementById("journalCancelBtn").addEventListener("click",resetJournalForm);
+
+document.getElementById("journalSaveBtn").addEventListener("click",async()=>{
+  if(!telegramInitData) return showToast("Откройте приложение внутри Telegram");
+  const stake=Number(document.getElementById("journalStake").value);
+  if(!Number.isFinite(stake)||stake<=0) return showToast("Введите сумму сделки");
+
+  const editId=document.getElementById("journalEditId").value;
+  const dateValue=document.getElementById("journalDate").value;
+  const payload={
+    init_data:telegramInitData,
+    pair:document.getElementById("journalPair").value,
+    direction:document.getElementById("journalDirection").value,
+    stake,
+    result:document.getElementById("journalResult").value,
+    payout_percent:Number(document.getElementById("journalPayout").value||92),
+    comment:document.getElementById("journalComment").value,
+    traded_at:dateValue?new Date(dateValue).toISOString():null
+  };
+  if(editId) payload.journal_id=Number(editId);
+
+  try{
+    const url=editId?"/api/journal/update":"/api/journal/add";
+    const r=await fetch(API_URL+url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    const data=await r.json(); if(!r.ok) throw new Error(data.detail||"Ошибка сохранения");
+    renderVipProfile(data); resetJournalForm(); showToast(editId?"Сделка обновлена":"Сделка добавлена");
+  }catch(e){showToast("Ошибка: "+e.message)}
 });
 
 
