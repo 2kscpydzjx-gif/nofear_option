@@ -186,17 +186,11 @@ button,input,select{font:inherit}
 </section>
 
 <section class="page" data-page="copy">
- <div class="card">
-  <div class="copy-id">131297622</div>
-  <button class="secondary" id="copyIdBtn" style="margin-top:10px">Скопировать ID мастера</button>
+ <div class="card" style="min-height:58vh;display:flex;align-items:center;justify-content:center;text-align:center;">
+  <div style="font-size:28px;font-weight:950;color:var(--gold2);letter-spacing:1.2px;">
+   В СТАДИИ РАЗРАБОТКИ
+  </div>
  </div>
- <div class="card"><div class="section-title" style="margin-top:0"><span class="accent">✦</span> Как запустить копирование в Pocket Option</div>
- <div class="steps">
-  <div class="step"><div class="stepico">👥</div><div><h3>Шаг 1: Откройте «Социальный трейдинг»</h3><p>Войдите в Pocket Option и перейдите в раздел социальной торговли.</p></div></div>
-  <div class="step"><div class="stepico">⌕</div><div><h3>Шаг 2: Найдите мастера по ID</h3><p>Вставьте ID <b style="color:var(--gold2)">131297622</b> в поле поиска.</p></div></div>
-  <div class="step"><div class="stepico">⌁</div><div><h3>Шаг 3: Откройте профиль мастера</h3><p>Откройте профиль, чтобы посмотреть статистику и настройки копирования.</p></div></div>
-  <div class="step"><div class="stepico">🚀</div><div><h3>Шаг 4: Запустите копирование</h3><p>Выберите пропорцию. Для демонстрации интерфейса указано 10–20%; фактический риск вы определяете самостоятельно.</p></div></div>
- </div></div>
 </section>
 
 <section class="page" data-page="calculator">
@@ -413,7 +407,7 @@ analyze.onclick=async()=>{
 document.getElementById("sendChat").onclick=sendChat;document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat()});
 function sendChat(){let inp=document.getElementById("chatInput"),t=inp.value.trim();if(!t)return;let box=document.getElementById("chatBox");box.insertAdjacentHTML("beforeend",`<div class="msg user">${t.replace(/[<>]/g,"")}</div>`);inp.value="";box.scrollTop=box.scrollHeight;setTimeout(()=>{box.insertAdjacentHTML("beforeend",`<div class="msg bot">Сообщение принято. В этой демонстрационной версии чат работает локально; подключение реального оператора или Telegram-диалога добавим на серверной части.</div>`);box.scrollTop=box.scrollHeight},650)}
 
-document.getElementById("copyIdBtn").onclick=async()=>{try{await navigator.clipboard.writeText("131297622");showToast("ID мастера скопирован")}catch{showToast("ID: 131297622")}};
+
 
 function calculate(){
  let b=+document.getElementById("calcBalance").value||1000,r=+document.getElementById("calcRate").value||0,d=Math.max(1,Math.min(60,+document.getElementById("calcDays").value||18));
