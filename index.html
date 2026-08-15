@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NOFEAR OPTION</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
 :root{
  --bg:#050505;--panel:#0c0b09;--panel2:#11100d;--gold:#f3b83f;--gold2:#ffd36b;
@@ -86,6 +87,21 @@ button,input,select{font:inherit}
 .modal h2{color:var(--gold2)}.closemodal{float:right}
 .footer{text-align:center;color:#5f5a52;font-size:12px;padding:5px 0 28px}
 @media(max-width:390px){.meta3{grid-template-columns:1fr}.three{grid-template-columns:1fr}.hero h2{font-size:27px}}
+
+.profile-hero{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.profile-photo{width:68px;height:68px;border-radius:20px;overflow:hidden;border:1px solid #6d4e17;background:#171107;display:grid;place-items:center;font-size:28px}
+.profile-photo img{width:100%;height:100%;object-fit:cover}
+.profile-name-main{font-size:22px;font-weight:900}
+.vipline{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.money-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.money-card{padding:15px;border:1px solid #2b241a;border-radius:16px;background:#0d0d0c}
+.money-card small{color:#77736c;display:block}.money-card b{font-size:23px;display:block;margin-top:5px}
+.positive{color:var(--green)}.negative{color:var(--red)}
+.history-row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:13px 0;border-bottom:1px solid #201d17}
+.history-row:last-child{border-bottom:0}.history-date{font-size:12px;color:#77736c;margin-top:4px}
+.balance-setup{display:flex;gap:9px;margin-top:12px}.balance-setup input{flex:1;min-width:0;padding:13px;border-radius:14px;border:1px solid #342a1a;background:#0a0a09;color:#fff}
+.auth-state{padding:11px 13px;border:1px solid #332914;border-radius:14px;background:#0d0c09;color:#a9a398;margin-bottom:14px}
+
 </style>
 </head>
 <body>
@@ -195,8 +211,59 @@ button,input,select{font:inherit}
 </section>
 
 <section class="page" data-page="profile">
- <div class="card"><div class="section-title" style="margin-top:0"><span class="accent">✦</span> Прогресс уровня</div><div class="levelrow"><div><div class="levelname">Market Initiate</div><div class="muted">Уровень 1/10</div></div><div class="xp">350 <span style="font-size:16px;color:#777">/ 500 XP</span></div></div><div class="levelbar" style="margin-top:18px"><span></span></div></div>
- <div class="card"><div class="section-title" style="margin-top:0"><span class="accent">🏆</span> Достижения и награды</div><div class="ach"><div class="achicon">👣</div><div class="pill" style="margin-top:14px">✓ ОТКРЫТО</div><h2>Первый шаг</h2><p class="muted">За первый вход на платформу NOFEAR OPTION</p><div class="pill">⚡ +100 XP</div><button class="secondary" id="claimBtn" style="margin-top:15px">Получить награду</button></div></div>
+ <div class="auth-state" id="profileAuthState">Подключение Telegram-аккаунта...</div>
+
+ <div class="card">
+  <div class="profile-hero">
+   <div class="profile-photo" id="profilePhoto">👤</div>
+   <div>
+    <div class="profile-name-main" id="profileName">VIP Trader</div>
+    <div class="muted" id="profileUsername">Telegram account</div>
+    <div class="vipline">
+     <span class="pill" id="vipBadge">VIP • ACTIVE</span>
+     <span class="pill" id="levelBadge">LEVEL 1</span>
+    </div>
+   </div>
+  </div>
+
+  <div class="section-title" style="margin-top:4px"><span class="accent">✦</span> Прогресс уровня</div>
+  <div class="levelrow">
+   <div><div class="levelname" id="levelName">Market Initiate</div><div class="muted" id="levelText">Уровень 1/10</div></div>
+   <div class="xp"><span id="xpValue">100</span> <span style="font-size:16px;color:#777">/ 500 XP</span></div>
+  </div>
+  <div class="levelbar" style="margin-top:18px"><span id="xpBar" style="width:20%"></span></div>
+ </div>
+
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">◈</span> Финансы</div>
+  <div class="money-grid">
+   <div class="money-card"><small>Текущий баланс</small><b id="cabBalance">$0.00</b></div>
+   <div class="money-card"><small>Общая прибыль</small><b id="cabProfit" class="positive">+$0.00</b></div>
+   <div class="money-card"><small>Сигналов</small><b id="cabSignals">0</b></div>
+   <div class="money-card"><small>WIN / LOSS</small><b><span id="cabWins">0</span> / <span id="cabLosses">0</span></b></div>
+  </div>
+  <div class="muted" style="font-size:13px;margin-top:14px">Для начала укажите баланс, от которого будет считаться статистика. Позже WIN/LOSS и движение средств привяжем к результатам сигналов.</div>
+  <div class="balance-setup">
+   <input id="startBalanceInput" type="number" min="0" step="0.01" placeholder="Например, 1000">
+   <button class="secondary" id="saveBalanceBtn" style="width:auto;white-space:nowrap">Сохранить</button>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">▦</span> Движение средств</div>
+  <div id="transactionHistory"><div class="muted">Операций пока нет.</div></div>
+ </div>
+
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">🏆</span> Достижения и награды</div>
+  <div class="ach">
+   <div class="achicon">👣</div>
+   <div class="pill" style="margin-top:14px">✓ ОТКРЫТО</div>
+   <h2>Первый шаг</h2>
+   <p class="muted">За первый вход на платформу NOFEAR OPTION</p>
+   <div class="pill">⚡ +100 XP</div>
+  </div>
+ </div>
 </section>
 
 <div class="footer">NOFEAR OPTION • интерактивный прототип Mini App</div>
@@ -274,7 +341,8 @@ analyze.onclick=async()=>{
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
         pair:pairName.textContent,
-        timeframe:document.getElementById("timeframeSelect").value
+        timeframe:document.getElementById("timeframeSelect").value,
+        init_data:telegramInitData
       })
     });
 
@@ -357,7 +425,131 @@ function calculate(){
 }
 document.getElementById("calcBtn").onclick=calculate;calculate();
 
-let claimed=false;document.getElementById("claimBtn").onclick=()=>{if(claimed)return showToast("Награда уже получена");claimed=true;document.getElementById("claimBtn").textContent="✓ Награда получена";showToast("+100 XP начислено")};
+
+
+const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+let telegramInitData = tg ? (tg.initData || "") : "";
+let currentVipUser = null;
+
+if(tg){
+  try{
+    tg.ready();
+    tg.expand();
+  }catch(e){}
+}
+
+function money(v, signed=false){
+  const n=Number(v||0);
+  const abs=Math.abs(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  if(signed) return (n>=0?"+":"-")+"$"+abs;
+  return "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function levelName(level){
+  const names=["Market Initiate","Signal Scout","Trend Reader","Momentum Trader","Market Hunter","Risk Master","Prime Trader","Elite Operator","Market Legend","NOFEAR Master"];
+  return names[Math.max(0,Math.min(9,Number(level||1)-1))];
+}
+
+function renderVipProfile(payload){
+  const u=payload.user;
+  currentVipUser=u;
+
+  const full=[u.first_name,u.last_name].filter(Boolean).join(" ") || "VIP Trader";
+  document.getElementById("profileName").textContent=full;
+  document.getElementById("profileUsername").textContent=u.username ? "@"+u.username : "Telegram ID: "+u.telegram_id;
+  document.getElementById("vipBadge").textContent="VIP • "+String(u.vip_status||"active").toUpperCase();
+
+  const level=Number(u.level||1);
+  const xp=Number(u.xp||0);
+  document.getElementById("levelBadge").textContent="LEVEL "+level;
+  document.getElementById("levelName").textContent=levelName(level);
+  document.getElementById("levelText").textContent="Уровень "+level+"/10";
+  document.getElementById("xpValue").textContent=xp;
+  document.getElementById("xpBar").style.width=Math.min(100,(xp%500)/500*100)+"%";
+
+  document.getElementById("cabBalance").textContent=money(u.current_balance);
+  const profit=Number(u.total_profit||0);
+  const profitEl=document.getElementById("cabProfit");
+  profitEl.textContent=money(profit,true);
+  profitEl.className=profit>=0?"positive":"negative";
+  document.getElementById("cabSignals").textContent=u.signals_count||0;
+  document.getElementById("cabWins").textContent=u.wins||0;
+  document.getElementById("cabLosses").textContent=u.losses||0;
+
+  const photo=document.getElementById("profilePhoto");
+  if(u.photo_url){
+    photo.innerHTML=`<img src="${u.photo_url.replace(/"/g,"&quot;")}" alt="Telegram profile">`;
+  }
+
+  const history=document.getElementById("transactionHistory");
+  const tx=payload.transactions||[];
+  if(!tx.length){
+    history.innerHTML='<div class="muted">Операций пока нет.</div>';
+  }else{
+    history.innerHTML=tx.map(x=>{
+      const amount=Number(x.amount||0);
+      const cls=amount<0?"negative":(amount>0?"positive":"");
+      const date=new Date(x.created_at).toLocaleString("ru-RU");
+      return `<div class="history-row">
+        <div><b>${x.title}</b><div class="history-date">${date}</div></div>
+        <div style="text-align:right"><b class="${cls}">${money(amount,true)}</b><div class="history-date">Баланс: ${money(x.balance_after)}</div></div>
+      </div>`;
+    }).join("");
+  }
+
+  document.getElementById("profileAuthState").textContent="Telegram-аккаунт подключен • ID "+u.telegram_id;
+  document.getElementById("profileAuthState").style.color="var(--green)";
+}
+
+async function loadVipProfile(){
+  const state=document.getElementById("profileAuthState");
+
+  if(!telegramInitData){
+    state.textContent="Откройте Mini App внутри Telegram, чтобы создать и загрузить личный аккаунт.";
+    state.style.color="var(--gold2)";
+    return;
+  }
+
+  try{
+    const r=await fetch(API_URL+"/api/auth/telegram",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({init_data:telegramInitData})
+    });
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.detail || "Ошибка авторизации");
+    renderVipProfile(data);
+  }catch(e){
+    state.textContent="Ошибка аккаунта: "+e.message;
+    state.style.color="var(--red)";
+  }
+}
+
+document.getElementById("saveBalanceBtn").addEventListener("click",async()=>{
+  const input=document.getElementById("startBalanceInput");
+  const amount=Number(input.value);
+
+  if(!telegramInitData) return showToast("Откройте приложение внутри Telegram");
+  if(!Number.isFinite(amount) || amount<0) return showToast("Введите корректный баланс");
+
+  try{
+    const r=await fetch(API_URL+"/api/profile/balance",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({init_data:telegramInitData,amount})
+    });
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.detail || "Ошибка сохранения");
+    renderVipProfile(data);
+    input.value="";
+    showToast("Баланс сохранён");
+  }catch(e){
+    showToast("Ошибка: "+e.message);
+  }
+});
+
+loadVipProfile();
+
 
 const lessons={
  bos:{title:"Price Action: BOS / CHoCH",body:"BOS отмечает продолжение текущей структуры, а CHoCH — возможную смену характера движения. В практической работе важно не рассматривать один пробой изолированно: оцените предыдущие максимумы/минимумы, импульс и подтверждение свечой."},
