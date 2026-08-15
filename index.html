@@ -133,6 +133,24 @@ button,input,select{font:inherit}
   <div class="muted" style="font-size:13px;margin-bottom:9px">ВЫБОР ВАЛЮТНОЙ ПАРЫ</div>
   <div class="select" id="pairSelect"><div class="select-main"><div class="goldbox">◎</div><span id="pairName">EUR/USD OTC</span></div><span>⌄</span></div>
   <div class="dropdown" id="dropdown"><div class="search"><input id="searchInput" placeholder="Поиск пары..."></div><div class="options" id="options"></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+    <div>
+      <div class="muted" style="font-size:12px;margin-bottom:7px">ТАЙМФРЕЙМ</div>
+      <select id="timeframeSelect" style="width:100%;padding:14px;border-radius:14px;border:1px solid #342a1a;background:#0b0c0d;color:#fff">
+        <option value="S5">S5</option>
+        <option value="S10">S10</option>
+        <option value="S15">S15</option>
+        <option value="S30">S30</option>
+        <option value="M1" selected>M1</option>
+        <option value="M2">M2</option>
+      </select>
+    </div>
+    <div>
+      <div class="muted" style="font-size:12px;margin-bottom:7px">API</div>
+      <div id="apiState" style="padding:14px;border-radius:14px;border:1px solid #342a1a;background:#0b0c0d;color:#f3b83f">Ожидание</div>
+    </div>
+  </div>
+
   <div class="dashboard">
    <div class="dhead"><span>LIVE-ДАШБОРД ТЕХ. АНАЛИЗА</span><span class="live">● LIVE</span></div>
    <div class="metric"><div class="mrow"><span>↗ Сила тренда</span><span id="trendText">Нейтрально</span></div><div class="bar"><div class="marker" id="trendMarker" style="left:48%"></div></div></div>
@@ -228,18 +246,106 @@ function renderPairs(f=""){options.innerHTML="";pairs.filter(p=>p.toLowerCase().
 renderPairs();document.getElementById("pairSelect").onclick=()=>{dropdown.classList.toggle("open");if(dropdown.classList.contains("open"))setTimeout(()=>search.focus(),50)};search.oninput=e=>renderPairs(e.target.value);
 
 let scanCount=0,callCount=0,putCount=0,accs=[];
+const API_URL = "https://gladly-uninsured-flanked.ngrok-free.dev";
+
 const analyze=document.getElementById("analyzeBtn"),scanBox=document.getElementById("scanBox"),resultBox=document.getElementById("resultBox"),progress=document.getElementById("progressBar");
 const statuses=["Подключение к потоку котировок...","Чтение RSI и MACD...","Оценка импульса и волатильности...","Фильтрация рыночного шума...","Формирование сигнала..."];
 function dash(dir){let pos=dir==="CALL"?70+Math.random()*18:8+Math.random()*18;document.getElementById("trendMarker").style.left=pos+"%";let tt=document.getElementById("trendText"),r=document.getElementById("rsiText"),m=document.getElementById("macdText");tt.textContent=dir==="CALL"?"Покупать":"Продавать";tt.style.color=dir==="CALL"?"var(--green)":"var(--red)";r.textContent=dir==="CALL"?"Перепродан":"Перекуплен";r.style.color=dir==="CALL"?"var(--green)":"var(--red)";m.textContent=dir==="CALL"?"Бычий":"Медвежий";m.style.color=dir==="CALL"?"var(--green)":"var(--red)"}
-analyze.onclick=async()=>{analyze.disabled=true;analyze.textContent="⚡ АНАЛИЗИРУЮ...";resultBox.style.display="none";scanBox.style.display="block";progress.style.width="0";
- for(let i=0;i<statuses.length;i++){document.getElementById("scanStatus").textContent=statuses[i];progress.style.width=(i+1)*20+"%";await new Promise(r=>setTimeout(r,470))}
- scanCount++;let dir=Math.random()>.5?"CALL":"PUT",prob=Math.floor(79+Math.random()*14);dir==="CALL"?callCount++:putCount++;accs.push(prob);dash(dir);
- document.getElementById("resultPair").textContent=pairName.textContent;let ar=document.getElementById("signalArrow"),st=document.getElementById("signalTitle"),sb=document.getElementById("signalBox");
- if(dir==="CALL"){ar.textContent="↑";ar.style.color="var(--green)";st.textContent="ВВЕРХ (CALL)";st.style.color="var(--green)";sb.style.background="rgba(20,71,49,.32)";sb.style.borderColor="rgba(39,209,127,.45)"}
- else{ar.textContent="↓";ar.style.color="var(--red)";st.textContent="ВНИЗ (PUT)";st.style.color="var(--red)";sb.style.background="rgba(85,26,28,.34)";sb.style.borderColor="rgba(255,77,79,.45)"}
- document.getElementById("probability").textContent=prob+"%";document.getElementById("strength").textContent=prob>=88?"Сильная":"Средняя";document.getElementById("assistantText").textContent=dir==="CALL"?"ИИ-ассистент: импульс смещён вверх; сигнал сформирован по совокупности индикаторов.":"ИИ-ассистент: продавцы имеют преимущество; сигнал сформирован по совокупности индикаторов.";
- document.getElementById("scanCount").textContent=scanCount;document.getElementById("callCount").textContent=callCount;document.getElementById("putCount").textContent=putCount;document.getElementById("avgAcc").textContent=Math.round(accs.reduce((a,b)=>a+b,0)/accs.length)+"%";
- scanBox.style.display="none";resultBox.style.display="block";analyze.disabled=false;analyze.textContent="⚡ ПОВТОРИТЬ АНАЛИЗ";
+analyze.onclick=async()=>{
+  analyze.disabled=true;
+  analyze.textContent="⚡ АНАЛИЗИРУЮ...";
+  resultBox.style.display="none";
+  scanBox.style.display="block";
+  progress.style.width="0";
+  document.getElementById("apiState").textContent="Запрос...";
+  document.getElementById("apiState").style.color="var(--gold2)";
+
+  const scanAnimation=(async()=>{
+    for(let i=0;i<statuses.length;i++){
+      document.getElementById("scanStatus").textContent=statuses[i];
+      progress.style.width=(i+1)*20+"%";
+      await new Promise(r=>setTimeout(r,430));
+    }
+  })();
+
+  try{
+    const response=await fetch(API_URL+"/api/analyze",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        pair:pairName.textContent,
+        timeframe:document.getElementById("timeframeSelect").value
+      })
+    });
+
+    let data;
+    try{ data=await response.json(); }catch{ data={detail:"Некорректный ответ API"}; }
+
+    await scanAnimation;
+
+    if(!response.ok){
+      throw new Error(data.detail || ("HTTP "+response.status));
+    }
+
+    scanCount++;
+    const dir=data.direction;
+    const prob=Math.round(Number(data.confidence || 0));
+    if(dir==="CALL") callCount++;
+    if(dir==="PUT") putCount++;
+    accs.push(prob);
+
+    dash(dir==="CALL"?"CALL":"PUT");
+    document.getElementById("resultPair").textContent=data.pair;
+    const ar=document.getElementById("signalArrow");
+    const st=document.getElementById("signalTitle");
+    const sb=document.getElementById("signalBox");
+
+    if(dir==="CALL"){
+      ar.textContent="↑"; ar.style.color="var(--green)";
+      st.textContent="ВВЕРХ (CALL)"; st.style.color="var(--green)";
+      sb.style.background="rgba(20,71,49,.32)";
+      sb.style.borderColor="rgba(39,209,127,.45)";
+    }else if(dir==="PUT"){
+      ar.textContent="↓"; ar.style.color="var(--red)";
+      st.textContent="ВНИЗ (PUT)"; st.style.color="var(--red)";
+      sb.style.background="rgba(85,26,28,.34)";
+      sb.style.borderColor="rgba(255,77,79,.45)";
+    }else{
+      ar.textContent="•"; ar.style.color="var(--gold2)";
+      st.textContent="НЕТ СИГНАЛА"; st.style.color="var(--gold2)";
+      sb.style.background="rgba(70,55,20,.28)";
+      sb.style.borderColor="rgba(243,184,63,.45)";
+    }
+
+    document.getElementById("probability").textContent=prob+"%";
+    document.getElementById("strength").textContent=prob>=88?"Сильная":prob>=70?"Средняя":"Слабая";
+    document.getElementById("assistantText").innerHTML=
+      "RSI: <b>"+(data.rsi ?? "—")+"</b> · "+
+      "EMA 9: <b>"+(data.ema_9 ?? "—")+"</b> · "+
+      "EMA 21: <b>"+(data.ema_21 ?? "—")+"</b><br>"+
+      "Momentum: <b>"+(data.momentum ?? "—")+"</b> · "+
+      "Свечей: <b>"+data.candles+"</b>";
+
+    document.getElementById("scanCount").textContent=scanCount;
+    document.getElementById("callCount").textContent=callCount;
+    document.getElementById("putCount").textContent=putCount;
+    document.getElementById("avgAcc").textContent=
+      accs.length ? Math.round(accs.reduce((a,b)=>a+b,0)/accs.length)+"%" : "—";
+
+    document.getElementById("apiState").textContent="ONLINE";
+    document.getElementById("apiState").style.color="var(--green)";
+    resultBox.style.display="block";
+    analyze.textContent="⚡ ПОВТОРИТЬ АНАЛИЗ";
+  }catch(err){
+    await scanAnimation;
+    document.getElementById("apiState").textContent="ERROR";
+    document.getElementById("apiState").style.color="var(--red)";
+    showToast("Ошибка анализа: "+err.message);
+    analyze.textContent="⚡ ПОВТОРИТЬ";
+  }finally{
+    scanBox.style.display="none";
+    analyze.disabled=false;
+  }
 }
 
 document.getElementById("sendChat").onclick=sendChat;document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat()});
