@@ -4,11 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NOFEAR OPTION</title>
-<script src="https://telegram.org/js/telegram-web-app.js">
-document.getElementById("dashSignalBtn").addEventListener("click",()=>go("signals"));
-document.getElementById("dashJournalBtn").addEventListener("click",()=>go("journal"));
-
-</script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
 :root{
  --bg:#050505;--panel:#0c0b09;--panel2:#11100d;--gold:#f3b83f;--gold2:#ffd36b;
@@ -224,7 +220,7 @@ button,input,select{font:inherit}
 
  <div class="card">
   <div class="section-title" style="margin-top:0"><span class="accent">🔥</span> Сейчас в тренде</div>
-  <div class="muted" style="font-size:12px;margin-bottom:13px">Реальный Market Pulse • M1 • обновление примерно раз в 3 минуты</div>
+  <div class="muted" style="font-size:12px;margin-bottom:13px">Реальный Market Pulse • M1 • автообновление каждые 3 минуты</div>
   <div id="trendList" class="trend-list">
    <div class="muted">Загрузка текущих OTC-трендов...</div>
   </div>
@@ -1067,6 +1063,20 @@ const lessons={
  risk:{title:"Правила мани-менеджмента",body:"Заранее задайте максимальный риск на сделку, дневной лимит потерь и точку остановки. Не повышайте размер позиции после убытка ради «отбивания». Журнал сделок нужен для проверки дисциплины и реальной статистики."}
 };
 const mb=document.getElementById("modalBack"),mc=document.getElementById("modalContent");document.querySelectorAll("[data-lesson]").forEach(x=>x.onclick=()=>{let l=lessons[x.dataset.lesson];mc.innerHTML=`<h2>${l.title}</h2><p style="line-height:1.65;color:#aaa49a">${l.body}</p><button class="primary" onclick="document.getElementById('modalBack').classList.remove('open')">Понятно</button>`;mb.classList.add("open")});document.getElementById("closeModal").onclick=()=>mb.classList.remove("open");mb.onclick=e=>{if(e.target===mb)mb.classList.remove("open")};
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const signalBtn=document.getElementById("dashSignalBtn");
+  const journalBtn=document.getElementById("dashJournalBtn");
+
+  if(signalBtn){
+    signalBtn.addEventListener("click",()=>go("signals"));
+  }
+
+  if(journalBtn){
+    journalBtn.addEventListener("click",()=>go("journal"));
+  }
+});
+
 </script>
 </body>
 </html>
