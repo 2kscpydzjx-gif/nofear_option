@@ -227,8 +227,8 @@ button,input,select{font:inherit}
  </div>
 
  <div class="dash-actions">
-  <button class="dash-action" id="dashSignalBtn">⚡ ПОЛУЧИТЬ СИГНАЛ</button>
-  <button class="dash-action" id="dashJournalBtn">☷ ОТКРЫТЬ ДНЕВНИК</button>
+  <button type="button" class="dash-action" id="dashSignalBtn" onclick="go('signals')">⚡ ПОЛУЧИТЬ СИГНАЛ</button>
+  <button type="button" class="dash-action" id="dashJournalBtn" onclick="go('journal')">☷ ОТКРЫТЬ ДНЕВНИК</button>
  </div>
 </section>
 
@@ -1064,18 +1064,6 @@ const lessons={
 };
 const mb=document.getElementById("modalBack"),mc=document.getElementById("modalContent");document.querySelectorAll("[data-lesson]").forEach(x=>x.onclick=()=>{let l=lessons[x.dataset.lesson];mc.innerHTML=`<h2>${l.title}</h2><p style="line-height:1.65;color:#aaa49a">${l.body}</p><button class="primary" onclick="document.getElementById('modalBack').classList.remove('open')">Понятно</button>`;mb.classList.add("open")});document.getElementById("closeModal").onclick=()=>mb.classList.remove("open");mb.onclick=e=>{if(e.target===mb)mb.classList.remove("open")};
 
-document.addEventListener("DOMContentLoaded",()=>{
-  const signalBtn=document.getElementById("dashSignalBtn");
-  const journalBtn=document.getElementById("dashJournalBtn");
-
-  if(signalBtn){
-    signalBtn.addEventListener("click",()=>go("signals"));
-  }
-
-  if(journalBtn){
-    journalBtn.addEventListener("click",()=>go("journal"));
-  }
-});
 
 </script>
 </body>
