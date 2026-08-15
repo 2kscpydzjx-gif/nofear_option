@@ -159,7 +159,7 @@ button,input,select{font:inherit}
   </div>
   <button class="primary" id="analyzeBtn" style="margin-top:17px">⚡ АНАЛИЗ ИИ</button>
   <div class="scan" id="scanBox"><div style="font-size:20px;font-weight:900;color:var(--gold2)">СКАНИРОВАНИЕ РЫНКА...</div><div class="radar"></div><div class="progress"><span id="progressBar"></span></div><p class="muted" id="scanStatus">Подключение к потоку котировок...</p></div>
-  <div class="result" id="resultBox"><div class="muted">СИГНАЛ ПО ПАРЕ</div><div id="resultPair" style="font-size:28px;font-weight:900;color:var(--gold2);margin-top:7px"></div><div class="signal" id="signalBox"><div class="sigarrow" id="signalArrow">↑</div><div class="sigtitle" id="signalTitle">ВВЕРХ (CALL)</div></div><div class="meta3"><div class="meta"><small>ЭКСПИРАЦИЯ</small><b>1 МИН (M1)</b></div><div class="meta"><small>ВЕРОЯТНОСТЬ</small><b id="probability">84%</b></div><div class="meta"><small>СИЛА</small><b id="strength">Средняя</b></div></div><div class="assistant" id="assistantText"></div></div>
+  <div class="result" id="resultBox"><div class="muted">СИГНАЛ ПО ПАРЕ</div><div id="resultPair" style="font-size:28px;font-weight:900;color:var(--gold2);margin-top:7px"></div><div class="signal" id="signalBox"><div class="sigarrow" id="signalArrow">↑</div><div class="sigtitle" id="signalTitle">ВВЕРХ (CALL)</div></div><div class="meta3"><div class="meta"><small>ЭКСПИРАЦИЯ</small><b>1 МИН (M1)</b></div><div class="meta"><small>ВЕРОЯТНОСТЬ</small><b id="probability">84%</b></div><div class="meta"><small>СИЛА</small><b id="strength">Средняя</b></div></div></div>
  </div>
 </section>
 
@@ -319,12 +319,6 @@ analyze.onclick=async()=>{
 
     document.getElementById("probability").textContent=prob+"%";
     document.getElementById("strength").textContent=prob>=88?"Сильная":prob>=70?"Средняя":"Слабая";
-    document.getElementById("assistantText").innerHTML=
-      "RSI: <b>"+(data.rsi ?? "—")+"</b> · "+
-      "EMA 9: <b>"+(data.ema_9 ?? "—")+"</b> · "+
-      "EMA 21: <b>"+(data.ema_21 ?? "—")+"</b><br>"+
-      "Momentum: <b>"+(data.momentum ?? "—")+"</b> · "+
-      "Свечей: <b>"+data.candles+"</b>";
 
     document.getElementById("scanCount").textContent=scanCount;
     document.getElementById("callCount").textContent=callCount;
