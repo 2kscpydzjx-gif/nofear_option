@@ -989,13 +989,13 @@ function renderVipProfile(payload){
       const cls=result==="WIN"?"positive":result==="LOSS"?"negative":"pending";
       const pnl=Number(t.pnl||0);
       const pnlText=result==="PENDING" ? "Очікує результату" : money(pnl,true);
-      const date=new Date(t.opened_at).toLocaleString("ru-RU");
+      const date=new Date(t.opened_at).toLocaleString(currentLanguage==="en"?"en-GB":"uk-UA");
       return `<div class="trade-item">
         <div class="trade-top">
           <div><b>${t.pair}</b><div class="trade-meta">${t.direction} • ${t.timeframe} • ${date}</div></div>
           <div style="text-align:right"><b class="${cls}">${result}</b><div class="trade-meta">${pnlText}</div></div>
         </div>
-        <div class="trade-meta">Сумма: ${money(t.stake)} • Confidence: ${Math.round(Number(t.confidence||0))}%</div>
+        <div class="trade-meta">${currentLanguage==="en"?"Amount":"Сума"}: ${money(t.stake)} • ${currentLanguage==="en"?"Confidence":"Впевненість"}: ${Math.round(Number(t.confidence||0))}%</div>
       </div>`;
     }).join("");
   }
@@ -1085,11 +1085,11 @@ function renderJournal(journal, analytics){
            <div><b>${t.pair}</b><div class="trade-meta">${t.direction} • ${new Date(t.traded_at).toLocaleString("ru-RU")}</div></div>
            <div style="text-align:right"><b class="${cls}">${t.result}</b><div class="trade-meta">${money(pnl,true)}</div></div>
           </div>
-          <div class="trade-meta">Сумма: ${money(t.stake)} • Payout: ${Number(t.payout_percent||0)}%</div>
+          <div class="trade-meta">${currentLanguage==="en"?"Amount":"Сума"}: ${money(t.stake)} • ${currentLanguage==="en"?"Payout":"Виплата"}: ${Number(t.payout_percent||0)}%</div>
           ${t.comment?`<div style="margin-top:9px;color:#a49e94">${String(t.comment).replace(/[<>]/g,"")}</div>`:""}
           <div class="journal-actions">
-            <button class="smallbtn" onclick="editJournalTrade(${t.id})">Редактировать</button>
-            <button class="smallbtn dangerbtn" onclick="deleteJournalTrade(${t.id})">Удалить</button>
+            <button class="smallbtn" onclick="editJournalTrade(${t.id})">${currentLanguage==="en"?"Edit":"Редагувати"}</button>
+            <button class="smallbtn dangerbtn" onclick="deleteJournalTrade(${t.id})">${currentLanguage==="en"?"Delete":"Видалити"}</button>
           </div>
         </div>`;
       }).join("");
