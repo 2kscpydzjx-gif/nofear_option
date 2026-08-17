@@ -163,6 +163,26 @@ button,input,select{font:inherit}
 .market-tab.active{background:#1b1408;color:var(--gold2);border-color:#76541a;box-shadow:0 0 18px rgba(243,184,63,.12)}
 .market-label{font-size:12px;color:#7f796f;text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px}
 
+
+.profile-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.profile-tab{border:1px solid #3b2e1a;background:#0d0c0a;color:#8c867c;border-radius:14px;padding:12px 6px;font-size:12px;font-weight:900;cursor:pointer}
+.profile-tab.active{background:#1a1206;color:var(--gold2);border-color:#745119;box-shadow:0 0 18px rgba(243,184,63,.12)}
+.profile-panel{display:none}.profile-panel.active{display:block}
+.task-list{display:flex;flex-direction:column;gap:10px}
+.task-card{padding:14px;border:1px solid #2d2519;border-radius:17px;background:#0d0d0c}
+.task-card.done{border-color:#4f3d19;background:linear-gradient(180deg,#151006,#0d0d0c)}
+.task-top{display:grid;grid-template-columns:44px 1fr auto;gap:11px;align-items:center}
+.task-icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:#171107;border:1px solid #4b3715;font-size:21px}
+.task-title{font-weight:900;font-size:15px}.task-desc{color:#77736c;font-size:11px;margin-top:3px}
+.task-reward{color:var(--gold2);font-weight:950;font-size:14px;white-space:nowrap}
+.task-progress-row{display:flex;justify-content:space-between;color:#77736c;font-size:11px;margin-top:11px}
+.task-progress{height:8px;border-radius:999px;background:#181818;overflow:hidden;margin-top:7px}
+.task-progress span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#9d6710,#ffd66b);transition:.35s}
+.task-card.done .task-progress span{background:linear-gradient(90deg,#6c8d39,#27d17f)}
+.task-complete{color:var(--green);font-weight:900}
+.xp-cap-note{padding:12px 13px;border:1px solid #312718;border-radius:14px;background:#0d0c09;color:#8d887f;font-size:12px;line-height:1.45;margin-bottom:13px}
+.level-next{font-size:12px;color:#8a857c;margin-top:8px;text-align:right}
+
 </style>
 </head>
 <body>
@@ -307,67 +327,14 @@ button,input,select{font:inherit}
 </section>
 
 
-<section class="page" data-page="journal">
- <div class="card">
-  <div class="section-title" style="margin-top:0"><span class="accent">☷</span> Покет дневник</div>
-  <div class="muted" style="line-height:1.5;margin-bottom:16px">
-   Добавляйте реальные сделки вручную. Статистика личного кабинета рассчитывается на основе записей этого дневника.
-  </div>
-
-  <div class="journal-form">
-   <div class="journal-field">
-    <label>Актив</label>
-    <select id="journalPair"><optgroup label="Валюты"><option>AUD/CAD OTC</option><option>AUD/USD OTC</option><option>CAD/CHF OTC</option><option>EUR/JPY OTC</option><option>EUR/USD OTC</option><option>EUR/CHF OTC</option><option>EUR/GBP OTC</option><option>GBP/AUD OTC</option><option>LBP/USD OTC</option><option>SAR/CNY OTC</option><option>UAH/USD OTC</option><option>USD/ARS OTC</option><option>USD/CAD OTC</option><option>USD/CHF OTC</option><option>USD/CNH OTC</option><option>USD/DZD OTC</option><option>QAR/CNY OTC</option><option>CAD/JPY OTC</option><option>USD/SGD OTC</option><option>USD/JPY OTC</option><option>YER/USD OTC</option><option>USD/MXN OTC</option><option>USD/BRL OTC</option><option>CHF/JPY OTC</option><option>USD/PHP OTC</option><option>AED/CNY OTC</option><option>USD/INR OTC</option><option>OMR/CNY OTC</option><option>AUD/NZD OTC</option><option>USD/BDT OTC</option><option>EUR/NZD OTC</option><option>BHD/CNY OTC</option><option>ZAR/USD OTC</option><option>USD/CLP OTC</option><option>USD/MYR OTC</option><option>GBP/USD OTC</option><option>CHF/NOK OTC</option><option>USD/VND OTC</option><option>AUD/JPY OTC</option><option>NZD/JPY OTC</option><option>USD/PKR OTC</option><option>GBP/JPY OTC</option><option>NZD/USD OTC</option><option>EUR/HUF OTC</option><option>USD/COP OTC</option><option>USD/EGP OTC</option><option>NGN/USD OTC</option><option>USD/IDR OTC</option><option>EUR/TRY OTC</option><option>MAD/USD OTC</option><option>AUD/CHF OTC</option><option>KES/USD OTC</option><option>TND/USD OTC</option><option>USD/THB OTC</option><option>JOD/CNY OTC</option></optgroup><optgroup label="Криптовалюты"><option>Avalanche OTC</option><option>Ethereum OTC</option><option>Chainlink OTC</option><option>Polygon OTC</option><option>TRON OTC</option><option>Solana OTC</option><option>Bitcoin OTC</option><option>Polkadot OTC</option><option>BNB OTC</option><option>Litecoin OTC</option><option>Dogecoin OTC</option><option>Cardano OTC</option><option>Bitcoin ETF OTC</option><option>Toncoin OTC</option></optgroup><optgroup label="Акции"><option>Apple OTC</option><option>American Express OTC</option><option>FACEBOOK INC OTC</option><option>Intel OTC</option><option>McDonald's OTC</option><option>Pfizer Inc OTC</option><option>Amazon OTC</option><option>Palantir Technologies OTC</option><option>Citigroup Inc OTC</option><option>GameStop Corp OTC</option><option>Boeing Company OTC</option><option>Microsoft OTC</option><option>Tesla OTC</option><option>Alibaba OTC</option><option>ExxonMobil OTC</option><option>Netflix OTC</option><option>Advanced Micro Devices OTC</option><option>Johnson & Johnson OTC</option><option>FedEx OTC</option><option>Marathon Digital Holdings OTC</option><option>VISA OTC</option><option>Coinbase Global OTC</option><option>Cisco OTC</option><option>VIX OTC</option></optgroup></select>
-   </div>
-   <div class="journal-field">
-    <label>Направление</label>
-    <select id="journalDirection"><option value="CALL">CALL</option><option value="PUT">PUT</option></select>
-   </div>
-   <div class="journal-field">
-    <label>Сумма сделки, $</label>
-    <input id="journalStake" type="number" min="0.01" step="0.01" placeholder="20">
-   </div>
-   <div class="journal-field">
-    <label>Результат</label>
-    <select id="journalResult"><option value="WIN">WIN</option><option value="LOSS">LOSS</option><option value="DRAW">DRAW</option></select>
-   </div>
-   <div class="journal-field">
-    <label>Payout, %</label>
-    <input id="journalPayout" type="number" min="0" max="100" step="0.1" value="92">
-   </div>
-   <div class="journal-field">
-    <label>Дата и время</label>
-    <input id="journalDate" type="datetime-local">
-   </div>
-   <div class="journal-field full">
-    <label>Комментарий</label>
-    <textarea id="journalComment" placeholder="Почему вошёл, что заметил, ошибка/наблюдение..."></textarea>
-   </div>
-  </div>
-
-  <input id="journalEditId" type="hidden">
-  <button class="primary" id="journalSaveBtn">+ ДОБАВИТЬ СДЕЛКУ</button>
-  <button class="secondary" id="journalCancelBtn" style="display:none;margin-top:9px">ОТМЕНИТЬ РЕДАКТИРОВАНИЕ</button>
- </div>
-
- <div class="card">
-  <div class="section-title" style="margin-top:0"><span class="accent">▥</span> Краткая аналитика</div>
-  <div class="analytics-grid">
-   <div class="analytics-card"><small>WIN RATE</small><b id="jWinRate">0%</b></div>
-   <div class="analytics-card"><small>NET P/L</small><b id="jNet">$0.00</b></div>
-   <div class="analytics-card"><small>Сделок</small><b id="jTrades">0</b></div>
-   <div class="analytics-card"><small>Средняя сделка</small><b id="jAvgStake">$0.00</b></div>
-  </div>
- </div>
-
- <div class="card">
-  <div class="section-title" style="margin-top:0"><span class="accent">☷</span> История сделок</div>
-  <div id="journalList" class="journal-list"><div class="muted">Сделок пока нет.</div></div>
- </div>
-</section>
-
 <section class="page" data-page="profile">
- <div class="auth-state" id="profileAuthState">Подключение Telegram-аккаунта...</div>
+ <div class="profile-tabs">
+  <button class="profile-tab active" type="button" data-profile-tab="profile">👤 ПРОФИЛЬ</button>
+  <button class="profile-tab" type="button" data-profile-tab="journal">📓 ДНЕВНИК</button>
+  <button class="profile-tab" type="button" data-profile-tab="tasks">⚡ ЗАДАНИЯ</button>
+ </div>
+ <div class="profile-panel active" data-profile-panel="profile">
+<div class="auth-state" id="profileAuthState">Подключение Telegram-аккаунта...</div>
 
  <div class="card">
   <div class="profile-hero">
@@ -387,7 +354,7 @@ button,input,select{font:inherit}
    <div><div class="levelname" id="levelName">Rookie Trader</div><div class="muted" id="levelText">Уровень 1/10</div></div>
    <div class="xp"><span id="xpValue">100</span> <span style="font-size:16px;color:#777">XP</span></div>
   </div>
-  <div class="levelbar" style="margin-top:18px"><span id="xpBar" style="width:20%"></span></div>
+  <div class="levelbar" style="margin-top:18px"><span id="xpBar" style="width:20%"></span></div><div class="level-next" id="levelNext">До следующего уровня: 400 XP</div>
  </div>
 
  <div class="card">
@@ -450,9 +417,79 @@ button,input,select{font:inherit}
   <div class="section-title" style="margin-top:0"><span class="accent">▦</span> Движение средств</div>
   <div id="transactionHistory"><div class="muted">Операций пока нет.</div></div>
  </div>
-</section>
+ </div>
+ <div class="profile-panel" data-profile-panel="journal">
+<div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">☷</span> Покет дневник</div>
+  <div class="muted" style="line-height:1.5;margin-bottom:16px">
+   Добавляйте реальные сделки вручную. Статистика личного кабинета рассчитывается на основе записей этого дневника.
+  </div>
 
-<div class="footer">NOFEAR OPTION • интерактивный прототип Mini App</div>
+  <div class="journal-form">
+   <div class="journal-field">
+    <label>Актив</label>
+    <select id="journalPair"><optgroup label="Валюты"><option>AUD/CAD OTC</option><option>AUD/USD OTC</option><option>CAD/CHF OTC</option><option>EUR/JPY OTC</option><option>EUR/USD OTC</option><option>EUR/CHF OTC</option><option>EUR/GBP OTC</option><option>GBP/AUD OTC</option><option>LBP/USD OTC</option><option>SAR/CNY OTC</option><option>UAH/USD OTC</option><option>USD/ARS OTC</option><option>USD/CAD OTC</option><option>USD/CHF OTC</option><option>USD/CNH OTC</option><option>USD/DZD OTC</option><option>QAR/CNY OTC</option><option>CAD/JPY OTC</option><option>USD/SGD OTC</option><option>USD/JPY OTC</option><option>YER/USD OTC</option><option>USD/MXN OTC</option><option>USD/BRL OTC</option><option>CHF/JPY OTC</option><option>USD/PHP OTC</option><option>AED/CNY OTC</option><option>USD/INR OTC</option><option>OMR/CNY OTC</option><option>AUD/NZD OTC</option><option>USD/BDT OTC</option><option>EUR/NZD OTC</option><option>BHD/CNY OTC</option><option>ZAR/USD OTC</option><option>USD/CLP OTC</option><option>USD/MYR OTC</option><option>GBP/USD OTC</option><option>CHF/NOK OTC</option><option>USD/VND OTC</option><option>AUD/JPY OTC</option><option>NZD/JPY OTC</option><option>USD/PKR OTC</option><option>GBP/JPY OTC</option><option>NZD/USD OTC</option><option>EUR/HUF OTC</option><option>USD/COP OTC</option><option>USD/EGP OTC</option><option>NGN/USD OTC</option><option>USD/IDR OTC</option><option>EUR/TRY OTC</option><option>MAD/USD OTC</option><option>AUD/CHF OTC</option><option>KES/USD OTC</option><option>TND/USD OTC</option><option>USD/THB OTC</option><option>JOD/CNY OTC</option></optgroup><optgroup label="Криптовалюты"><option>Avalanche OTC</option><option>Ethereum OTC</option><option>Chainlink OTC</option><option>Polygon OTC</option><option>TRON OTC</option><option>Solana OTC</option><option>Bitcoin OTC</option><option>Polkadot OTC</option><option>BNB OTC</option><option>Litecoin OTC</option><option>Dogecoin OTC</option><option>Cardano OTC</option><option>Bitcoin ETF OTC</option><option>Toncoin OTC</option></optgroup><optgroup label="Акции"><option>Apple OTC</option><option>American Express OTC</option><option>FACEBOOK INC OTC</option><option>Intel OTC</option><option>McDonald's OTC</option><option>Pfizer Inc OTC</option><option>Amazon OTC</option><option>Palantir Technologies OTC</option><option>Citigroup Inc OTC</option><option>GameStop Corp OTC</option><option>Boeing Company OTC</option><option>Microsoft OTC</option><option>Tesla OTC</option><option>Alibaba OTC</option><option>ExxonMobil OTC</option><option>Netflix OTC</option><option>Advanced Micro Devices OTC</option><option>Johnson & Johnson OTC</option><option>FedEx OTC</option><option>Marathon Digital Holdings OTC</option><option>VISA OTC</option><option>Coinbase Global OTC</option><option>Cisco OTC</option><option>VIX OTC</option></optgroup></select>
+   </div>
+   <div class="journal-field">
+    <label>Направление</label>
+    <select id="journalDirection"><option value="CALL">CALL</option><option value="PUT">PUT</option></select>
+   </div>
+   <div class="journal-field">
+    <label>Сумма сделки, $</label>
+    <input id="journalStake" type="number" min="0.01" step="0.01" placeholder="20">
+   </div>
+   <div class="journal-field">
+    <label>Результат</label>
+    <select id="journalResult"><option value="WIN">WIN</option><option value="LOSS">LOSS</option><option value="DRAW">DRAW</option></select>
+   </div>
+   <div class="journal-field">
+    <label>Payout, %</label>
+    <input id="journalPayout" type="number" min="0" max="100" step="0.1" value="92">
+   </div>
+   <div class="journal-field">
+    <label>Дата и время</label>
+    <input id="journalDate" type="datetime-local">
+   </div>
+   <div class="journal-field full">
+    <label>Комментарий</label>
+    <textarea id="journalComment" placeholder="Почему вошёл, что заметил, ошибка/наблюдение..."></textarea>
+   </div>
+  </div>
+
+  <input id="journalEditId" type="hidden">
+  <button class="primary" id="journalSaveBtn">+ ДОБАВИТЬ СДЕЛКУ</button>
+  <button class="secondary" id="journalCancelBtn" style="display:none;margin-top:9px">ОТМЕНИТЬ РЕДАКТИРОВАНИЕ</button>
+ </div>
+
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">▥</span> Краткая аналитика</div>
+  <div class="analytics-grid">
+   <div class="analytics-card"><small>WIN RATE</small><b id="jWinRate">0%</b></div>
+   <div class="analytics-card"><small>NET P/L</small><b id="jNet">$0.00</b></div>
+   <div class="analytics-card"><small>Сделок</small><b id="jTrades">0</b></div>
+   <div class="analytics-card"><small>Средняя сделка</small><b id="jAvgStake">$0.00</b></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">☷</span> История сделок</div>
+  <div id="journalList" class="journal-list"><div class="muted">Сделок пока нет.</div></div>
+ </div>
+ </div>
+
+<div class="profile-panel" data-profile-panel="tasks">
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">⚡</span> Задания и награды</div>
+  <div class="xp-cap-note" id="scanXpCapNote">XP за сканирование: до 20 XP в день.</div>
+  <div id="xpTaskList" class="task-list"><div class="muted">Загрузка заданий...</div></div>
+ </div>
+ <div class="card">
+  <div class="section-title" style="margin-top:0"><span class="accent">✦</span> Последние награды</div>
+  <div id="xpEventList"><div class="muted">Наград пока нет.</div></div>
+ </div>
+</div>
+
+</section><div class="footer">NOFEAR OPTION • интерактивный прототип Mini App</div>
 </div>
 
 <div class="drawerback" id="drawerBack"><aside class="drawer">
@@ -466,7 +503,6 @@ button,input,select{font:inherit}
   <div class="menuitem" data-go="chat">▢ <span>Веб-чат</span></div>
   <div class="menuitem" data-go="copy">▱ <span>Копирование</span></div>
   <div class="menuitem" data-go="calculator">▦ <span>Калькулятор</span></div>
-  <div class="menuitem" data-go="journal">☷ <span>Дневник</span></div>
   <div class="menuitem" data-go="profile">♙ <span>Личный кабинет</span></div>
  </nav>
 </aside></div>
@@ -477,7 +513,7 @@ button,input,select{font:inherit}
 <div class="modalback" id="modalBack"><div class="modal"><button class="iconbtn closemodal" id="closeModal">×</button><div id="modalContent"></div></div></div>
 
 <script>
-const titles={dashboard:"Главная",training:"Обучение",signals:"Сигналы",chat:"Веб-чат",copy:"Копирование",calculator:"Калькулятор",journal:"Дневник",profile:"Личный кабинет"};
+const titles={dashboard:"Главная",training:"Обучение",signals:"Сигналы",chat:"Веб-чат",copy:"Копирование",calculator:"Калькулятор",profile:"Личный кабинет"};
 const pages=[...document.querySelectorAll(".page")], menuItems=[...document.querySelectorAll(".menuitem")];
 const drawer=document.getElementById("drawerBack");
 function go(page){
@@ -681,6 +717,15 @@ document.getElementById("calcBtn").onclick=calculate;calculate();
 
 
 
+
+const profileTabs=[...document.querySelectorAll("[data-profile-tab]")];
+const profilePanels=[...document.querySelectorAll("[data-profile-panel]")];
+function openProfileTab(name){
+  profileTabs.forEach(b=>b.classList.toggle("active",b.dataset.profileTab===name));
+  profilePanels.forEach(p=>p.classList.toggle("active",p.dataset.profilePanel===name));
+}
+profileTabs.forEach(b=>b.addEventListener("click",()=>openProfileTab(b.dataset.profileTab)));
+
 const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
 let telegramInitData = tg ? (tg.initData || "") : "";
 let currentVipUser = null;
@@ -700,8 +745,15 @@ function money(v, signed=false){
 }
 
 function levelName(level){
-  const names=["Rookie Trader","Signal Scout","Trend Reader","Momentum Trader","Market Hunter","Risk Master","Prime Trader","Elite Operator","Market Legend","NOFEAR Master"];
+  const names=["Rookie Trader","Market Explorer","Signal Hunter","Trend Analyst","Market Strategist","Pro Trader","Elite Trader","Market Expert","Trading Master","NOFEAR LEGEND"];
   return names[Math.max(0,Math.min(9,Number(level||1)-1))];
+}
+const LEVEL_THRESHOLDS=[0,500,1200,2500,4500,7000,10000,15000,22000,30000];
+function levelProgress(xp,level){
+  const current=LEVEL_THRESHOLDS[Math.max(0,level-1)]||0;
+  if(level>=10) return {percent:100,remaining:0};
+  const next=LEVEL_THRESHOLDS[level],span=Math.max(1,next-current);
+  return {percent:Math.max(0,Math.min(100,((xp-current)/span)*100)),remaining:Math.max(0,next-xp)};
 }
 
 function renderVipProfile(payload){
@@ -720,7 +772,9 @@ function renderVipProfile(payload){
   document.getElementById("levelName").textContent=levelName(level);
   document.getElementById("levelText").textContent="Уровень "+level+"/10";
   document.getElementById("xpValue").textContent=xp;
-  document.getElementById("xpBar").style.width=Math.min(100,((xp-(level-1)*500)/500)*100)+"%";
+  const lp=levelProgress(xp,level);
+  document.getElementById("xpBar").style.width=lp.percent+"%";
+  document.getElementById("levelNext").textContent=level>=10?"Максимальный уровень достигнут":"До следующего уровня: "+lp.remaining+" XP";
 
   document.getElementById("cabBalance").textContent=money(u.current_balance);
   const profit=Number(u.total_profit||0);
@@ -800,10 +854,40 @@ function renderVipProfile(payload){
   renderEquityCurve(a.equity_curve||[]);
   renderJournal(payload.journal||[], a);
 
+  renderXpTasks(payload.xp_tasks||{});
+  renderXpEvents(payload.xp_events||[]);
+  showXpRewards(payload.xp_rewards||[]);
+
 document.getElementById("profileAuthState").textContent="Telegram-аккаунт подключен • ID "+u.telegram_id;
   document.getElementById("profileAuthState").style.color="var(--green)";
 }
 
+
+
+function renderXpTasks(data){
+  const box=document.getElementById("xpTaskList");
+  if(!box) return;
+  const tasks=data.tasks||[];
+  const cap=document.getElementById("scanXpCapNote");
+  if(cap) cap.textContent=`XP за сканирование сегодня: ${Number(data.scan_xp_today||0)} / ${Number(data.scan_xp_daily_cap||20)} XP. После лимита анализы продолжают работать, но XP за них не начисляется.`;
+  box.innerHTML=tasks.length?tasks.map(t=>{
+    const p=Number(t.progress||0),target=Math.max(1,Number(t.target||1)),pct=Math.min(100,p/target*100);
+    return `<div class="task-card ${t.completed?"done":""}">
+      <div class="task-top">
+       <div class="task-icon">${t.icon||"⚡"}</div>
+       <div><div class="task-title">${t.title}</div><div class="task-desc">${t.description||""}</div></div>
+       <div class="task-reward">+${t.reward} XP</div>
+      </div>
+      <div class="task-progress-row"><span>${p} / ${target}</span><span class="${t.completed?"task-complete":""}">${t.completed?"ВЫПОЛНЕНО":"В ПРОЦЕССЕ"}</span></div>
+      <div class="task-progress"><span style="width:${pct}%"></span></div>
+    </div>`;
+  }).join(""):'<div class="muted">Задания пока недоступны.</div>';
+}
+function renderXpEvents(events){
+  const box=document.getElementById("xpEventList"); if(!box)return;
+  box.innerHTML=events.length?events.slice(0,12).map(e=>`<div class="history-row"><div><b>${e.title}</b><div class="history-date">${new Date(e.created_at).toLocaleString("ru-RU")}</div></div><div class="positive" style="font-weight:900">+${e.amount} XP</div></div>`).join(""):'<div class="muted">Наград пока нет.</div>';
+}
+function showXpRewards(rewards){(rewards||[]).forEach(r=>showXpReward(r));}
 
 function renderEquityCurve(curve){
   const line=document.getElementById("equityLine"), grid=document.getElementById("equityGrid");
@@ -879,7 +963,8 @@ window.editJournalTrade=function(id){
   const d=new Date(t.traded_at); if(!isNaN(d)) document.getElementById("journalDate").value=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16);
   document.getElementById("journalSaveBtn").textContent="СОХРАНИТЬ ИЗМЕНЕНИЯ";
   document.getElementById("journalCancelBtn").style.display="block";
-  go("journal");
+  go("profile");
+  openProfileTab("journal");
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
@@ -1033,7 +1118,6 @@ async function loadVipProfile(){
     const data=await r.json();
     if(!r.ok) throw new Error(data.detail || "Ошибка авторизации");
     renderVipProfile(data);
-    showXpReward(data.xp_reward);
   }catch(e){
     state.textContent="Ошибка аккаунта: "+e.message;
     state.style.color="var(--red)";
@@ -1114,9 +1198,7 @@ document.getElementById("journalSaveBtn").addEventListener("click",async()=>{
     const url=editId?"/api/journal/update":"/api/journal/add";
     const r=await fetch(API_URL+url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
     const data=await r.json(); if(!r.ok) throw new Error(data.detail||"Ошибка сохранения");
-    const beforeXp=Number(currentVipUser?.xp||0);
     renderVipProfile(data); resetJournalForm(); showToast(editId?"Сделка обновлена":"Сделка добавлена");
-    if(!editId){ const gained=Number(data.user?.xp||0)-beforeXp; if(gained>0) showXpReward({amount:gained,title:"Дневник и сделка"}); }
   }catch(e){showToast("Ошибка: "+e.message)}
 });
 
@@ -1130,7 +1212,21 @@ const lessons={
  candles:{title:"Стратегия «Три свечи»",body:"Идея модели — дождаться трёх последовательных закрытий с выраженным импульсом в одну сторону, после чего оценить контекст старшего таймфрейма и только затем рассматривать вход. Не используйте паттерн без фильтра тренда и волатильности."},
  risk:{title:"Правила мани-менеджмента",body:"Заранее задайте максимальный риск на сделку, дневной лимит потерь и точку остановки. Не повышайте размер позиции после убытка ради «отбивания». Журнал сделок нужен для проверки дисциплины и реальной статистики."}
 };
-const mb=document.getElementById("modalBack"),mc=document.getElementById("modalContent");document.querySelectorAll("[data-lesson]").forEach(x=>x.onclick=()=>{let l=lessons[x.dataset.lesson];mc.innerHTML=`<h2>${l.title}</h2><p style="line-height:1.65;color:#aaa49a">${l.body}</p><button class="primary" onclick="document.getElementById('modalBack').classList.remove('open')">Понятно</button>`;mb.classList.add("open")});document.getElementById("closeModal").onclick=()=>mb.classList.remove("open");mb.onclick=e=>{if(e.target===mb)mb.classList.remove("open")};
+const mb=document.getElementById("modalBack"),mc=document.getElementById("modalContent");
+document.querySelectorAll("[data-lesson]").forEach(x=>x.onclick=async()=>{
+  const key=x.dataset.lesson,l=lessons[key];
+  mc.innerHTML=`<h2>${l.title}</h2><p style="line-height:1.65;color:#aaa49a">${l.body}</p><button class="primary" onclick="document.getElementById('modalBack').classList.remove('open')">Понятно</button>`;
+  mb.classList.add("open");
+  if(telegramInitData){
+    try{
+      const r=await fetch(API_URL+"/api/xp/training",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({init_data:telegramInitData,lesson_key:key})});
+      const data=await r.json();
+      if(r.ok) renderVipProfile(data);
+    }catch(e){console.error("TRAINING XP:",e)}
+  }
+});
+document.getElementById("closeModal").onclick=()=>mb.classList.remove("open");
+mb.onclick=e=>{if(e.target===mb)mb.classList.remove("open")};
 
 
 </script>
