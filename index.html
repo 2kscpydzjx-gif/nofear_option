@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -514,7 +514,7 @@ button,input,select{font:inherit}
 
 <div class="toast" id="toast"></div>
 
-<div class="xp-toast" id="xpToast"><div class="xp-toast-icon">⚡</div><div class="xp-toast-main"><div id="xpToastTitle">Нагорода XP</div><div class="xp-toast-sub">Прогрес профілю оновлено</div></div><div class="xp-toast-amount" id="xpToastAmount">+0</div></div>
+<div class="xp-toast" id="xpToast"><div class="xp-toast-icon">⚡</div><div class="xp-toast-main"><div id="xpToastTitle">Нагорода XP</div><div class="xp-toast-sub" id="xpToastSub">Прогрес профілю оновлено</div></div><div class="xp-toast-amount" id="xpToastAmount">+0</div></div>
 <div class="modalback" id="modalBack"><div class="modal"><button class="iconbtn closemodal" id="closeModal">×</button><div id="modalContent"></div></div></div>
 
 <script>
@@ -533,7 +533,7 @@ document.getElementById("closeMenu").onclick=()=>drawer.classList.remove("open")
 drawer.onclick=e=>{if(e.target===drawer)drawer.classList.remove("open")};
 
 
-const I18N_EN = {"Головна": "Home", "Навчання": "Training", "Сигнали": "Signals", "Веб-чат": "Web chat", "Копіювання": "Copy Trading", "Калькулятор": "Calculator", "Особистий кабінет": "Personal Account", "Меню": "Menu", "Вітаємо,": "Welcome,", "Ваш VIP-акаунт NOFEAR OPTION": "Your NOFEAR OPTION VIP account", "Баланс": "Balance", "Сьогодні:": "Today:", "Угод": "Trades", "Середня угода": "Average trade", "Зараз у тренді": "Trending now", "Реальний Market Pulse • M1 • автооновлення кожні 3 хвилини": "Real Market Pulse • M1 • auto-refresh every 3 minutes", "Завантаження поточних OTC-трендів...": "Loading current OTC trends...", "Зараз немає достатньо виражених рухів.": "No sufficiently strong moves right now.", "Market Pulse тимчасово недоступний. Спробуйте пізніше.": "Market Pulse is temporarily unavailable. Try again later.", "Відкрийте Mini App у Telegram.": "Open the Mini App inside Telegram.", "ПРОФІЛЬ": "PROFILE", "ЩОДЕННИК": "JOURNAL", "ЗАВДАННЯ": "TASKS", "Прогрес рівня": "Level progress", "Торговий акаунт": "Trading account", "Загальний прибуток": "Total profit", "Сигналів": "Signals", "Ризик": "Risk", "Стартовий баланс": "Starting balance", "Ризик на сигнал, %": "Risk per signal, %", "Історія сигналів": "Signal history", "Сигналів поки немає.": "No signals yet.", "Аналітика щоденника": "Journal analytics", "Рух коштів": "Funds movement", "Операцій поки немає.": "No operations yet.", "Найкраща пара": "Best pair", "Найгірша пара": "Worst pair", "Динаміка акаунта": "Account performance", "Це внутрішній облік NOFEAR OPTION. Баланс не є балансом Pocket Option.": "This is NOFEAR OPTION internal tracking. The balance is not your Pocket Option balance.", "Pocket-щоденник": "Pocket Journal", "Додавайте реальні угоди вручну. Статистика особистого кабінету розраховується на основі записів цього щоденника.": "Add real trades manually. Personal account statistics are calculated from this journal.", "Актив": "Asset", "Напрямок": "Direction", "Сума угоди, $": "Trade amount, $", "Результат": "Result", "Дата й час": "Date & time", "Коментар": "Comment", "Чому увійшов, що помітив, помилка/спостереження...": "Why you entered, what you noticed, mistake/observation...", "+ ДОДАТИ УГОДУ": "+ ADD TRADE", "ЗБЕРЕГТИ ЗМІНИ": "SAVE CHANGES", "СКАСУВАТИ РЕДАГУВАННЯ": "CANCEL EDIT", "Коротка аналітика": "Quick analytics", "Історія угод": "Trade history", "Угод поки немає.": "No trades yet.", "Завдання та нагороди": "Tasks & rewards", "Останні нагороди": "Recent rewards", "Завантаження завдань...": "Loading tasks...", "Завдання поки недоступні.": "Tasks are currently unavailable.", "Нагород поки немає.": "No rewards yet.", "ВИКОНАНО": "COMPLETED", "У ПРОЦЕСІ": "IN PROGRESS", "XP за сканування: до 20 XP в день.": "Scan XP: up to 20 XP per day.", "Стартовий баланс, $": "Starting balance, $", "Зростання за день, %": "Daily growth, %", "Кількість днів": "Number of days", "Ризик на угоду, %": "Risk per trade, %", "РОЗРАХУВАТИ": "CALCULATE", "Підсумковий баланс": "Final balance", "Прогноз зростання": "Growth forecast", "Розбивка за днями": "Daily breakdown", "День": "Day", "Поч. баланс": "Start balance", "Прибуток дня": "Daily profit", "Кін. баланс": "End balance", "Пошук активу...": "Search asset...", "СКАНУВАННЯ РИНКУ...": "SCANNING MARKET...", "Підключення до потоку котирувань...": "Connecting to quote stream...", "Фільтрація ринкового шуму...": "Filtering market noise...", "Зчитування RSI та MACD...": "Reading RSI and MACD...", "Оцінка імпульсу та волатильності...": "Evaluating momentum and volatility...", "Формування сигналу...": "Generating signal...", "СИГНАЛ ЗА АКТИВОМ": "ASSET SIGNAL", "ВГОРУ (CALL)": "UP (CALL)", "ВНИЗ (PUT)": "DOWN (PUT)", "НЕМАЄ СИГНАЛУ": "NO SIGNAL", "ЙМОВІРНІСТЬ": "PROBABILITY", "СИЛА": "STRENGTH", "ЕКСПІРАЦІЯ": "EXPIRY", "Середня": "Medium", "Сильна": "Strong", "Слабка": "Weak", "Сканувань": "Scans", "Середня точність": "Average accuracy", "LIVE-ДАШБОРД ТЕХ. АНАЛІЗУ": "LIVE TECHNICAL ANALYSIS DASHBOARD", "Сила тренду": "Trend strength", "Волатильність": "Volatility", "Нейтрально": "Neutral", "Бичачий": "Bullish", "Ведмежий": "Bearish", "Купувати": "Buy", "Продавати": "Sell", "Перекуплений": "Overbought", "Перепроданий": "Oversold", "Напишіть повідомлення...": "Type a message...", "Повідомлення прийнято. У цій демонстраційній версії чат працює локально; підключення реального оператора або Telegram-діалогу додамо на серверній частині.": "Message received. In this demo version the chat works locally; a real operator or Telegram chat can be connected on the server side.", "У РОЗРОБЦІ": "IN DEVELOPMENT", "Структурні пробої ринку": "Market structure breaks", "Стратегія «Три свічки»": "Three Candles Strategy", "Модель входу за імпульсом": "Momentum entry model", "Правила мані-менеджменту": "Money management rules", "Система захисту капіталу": "Capital protection system", "ПРОСУНУТИЙ": "ADVANCED", "СЕРЕДНІЙ": "INTERMEDIATE", "ОБОВ'ЯЗКОВИЙ": "ESSENTIAL", "уроків": "lessons", "Зрозуміло": "Got it", "Нових сповіщень немає": "No new notifications", "Баланс збережено": "Balance saved", "Введіть коректний баланс": "Enter a valid balance", "Помилка збереження": "Save error", "Ризик збережено": "Risk saved", "Ризик: від 0.1% до 10%": "Risk: from 0.1% to 10%", "Помилка збереження ризику": "Risk save error", "Введіть суму угоди": "Enter trade amount", "Угоду додано": "Trade added", "Угоду оновлено": "Trade updated", "Угоду видалено": "Trade deleted", "Помилка видалення": "Delete error", "Видалити цю угоду зі щоденника?": "Delete this trade from the journal?", "Помилка авторизації": "Authorization error", "Некоректна відповідь API": "Invalid API response", "Запит...": "Request...", "Очікує результату": "Awaiting result", "Досягнуто максимального рівня": "Maximum level reached", "Нагорода XP": "XP Reward", "Прогрес профілю оновлено": "Profile progress updated", "Сильний": "Strong", "Помірний": "Moderate", "Слабкий": "Weak", "висхідний": "uptrend", "низхідний": "downtrend", "⚡ АНАЛІЗУЮ...": "⚡ ANALYZING...", "⚡ ПОВТОРИТИ АНАЛІЗ": "⚡ ANALYZE AGAIN", "⚡ ПОВТОРИТИ": "⚡ RETRY", "Опануйте структуру ринку, визначаючи Break of Structure (BOS) та Change of Character (CHoCH) — основу читання цінового руху.": "Master market structure by identifying Break of Structure (BOS) and Change of Character (CHoCH), the foundation of reading price action.", "Імпульсна стратегія на основі трьох послідовних закриттів свічок — для таймфреймів M1 та M5 із правилами підтвердження.": "A momentum strategy based on three consecutive candle closes, for M1 and M5 with confirmation rules.", "Правила ризику, розміру позиції та денних лімітів просадки. Базова навичка, що відділяє системну торгівлю від гри.": "Rules for risk, position sizing, and daily drawdown limits. A core skill that separates systematic trading from gambling.", "🏅 Доступ до VIP-академії": "🏅 VIP Academy Access", "Опануйте ринки з": "Master the markets with", "перевіреними стратегіями": "proven strategies", "Структурована програма з прайс-екшену, імпульсних моделей і мані-менеджменту для дисциплінованої торгівлі.": "A structured program in price action, momentum models, and money management for disciplined trading.", "Курси": "Courses", "30 хв": "30 min", "Читання": "Reading", "Точність": "Accuracy", "БІБЛІОТЕКА СТРАТЕГІЙ": "STRATEGY LIBRARY", "◷ 12 хв　▣ 4 уроки": "◷ 12 min　▣ 4 lessons", "◷ 8 хв　▣ 3 уроки": "◷ 8 min　▣ 3 lessons", "◷ 10 хв　▣ 5 уроків": "◷ 10 min　▣ 5 lessons", "Читати ›": "Read ›", "ПОРАДИ ДНЯ": "DAILY TIPS", "Не ризикуйте більш ніж 2% балансу на одну угоду.": "Do not risk more than 2% of your balance on a single trade.", "Чекайте на підтверджувальні свічки. Вхід за однією тінню — це гра, а не торгівля.": "Wait for confirming candles. Entering on a single wick is gambling, not trading.", "Записуйте угоди в щоденник і аналізуйте власні дані.": "Log trades in your journal and analyze your own data.", "Уникайте важливих новинних релізів без новинної стратегії.": "Avoid major news releases unless you have a news-trading strategy.", "Встановіть денний ліміт втрат і дотримуйтеся його без винятків.": "Set a daily loss limit and follow it without exceptions.", "Якщо M1 неясний, перемкніться на M5 або M15 для контексту.": "If M1 is unclear, switch to M5 or M15 for context.", "УГОД СЬОГОДНІ": "TRADES TODAY", "ТЕРМІНАЛ ШІ-АНАЛІЗУ · POCKET OPTION": "AI ANALYSIS TERMINAL · POCKET OPTION", "ВИБІР АКТИВУ": "SELECT ASSET", "ТАЙМФРЕЙМ": "TIMEFRAME", "Очікування": "WAITING", "Нейтральний": "Neutral", "⚡ АНАЛІЗ ШІ": "⚡ AI ANALYSIS", "1 ХВ (M1)": "1 MIN (M1)", "VIP-команда": "VIP Team", "ВЕБ-ЧАТ NOFEAR OPTION": "NOFEAR OPTION WEB CHAT", "Ласкаво просимо до VIP-чату NOFEAR OPTION. Тут можна поставити запитання щодо роботи термінала та стратегій.": "Welcome to the NOFEAR OPTION VIP chat. Here you can ask questions about the terminal and strategies.", "Калькулятор зростання": "Growth Calculator", "Підключення Telegram-акаунта...": "Connecting Telegram account...", "XP за сканування: до 20 XP на день.": "Scan XP: up to 20 XP per day.", "NOFEAR OPTION • інтерактивний Mini App": "NOFEAR OPTION • Interactive Mini App", "ТОРГОВІ СИГНАЛИ": "TRADING SIGNALS", "Трейдер 👑": "Trader 👑"};
+const I18N_EN = {"Головна": "Home", "Навчання": "Training", "Сигнали": "Signals", "Веб-чат": "Web chat", "Копіювання": "Copy Trading", "Калькулятор": "Calculator", "Особистий кабінет": "Personal Account", "Меню": "Menu", "Вітаємо,": "Welcome,", "Ваш VIP-акаунт NOFEAR OPTION": "Your NOFEAR OPTION VIP account", "Баланс": "Balance", "Сьогодні:": "Today:", "Угод": "Trades", "Середня угода": "Average trade", "Зараз у тренді": "Trending now", "Реальний Market Pulse • M1 • автооновлення кожні 3 хвилини": "Real Market Pulse • M1 • auto-refresh every 3 minutes", "Завантаження поточних OTC-трендів...": "Loading current OTC trends...", "Зараз немає достатньо виражених рухів.": "No sufficiently strong moves right now.", "Market Pulse тимчасово недоступний. Спробуйте пізніше.": "Market Pulse is temporarily unavailable. Try again later.", "Відкрийте Mini App у Telegram.": "Open the Mini App inside Telegram.", "ПРОФІЛЬ": "PROFILE", "ЩОДЕННИК": "JOURNAL", "ЗАВДАННЯ": "TASKS", "Прогрес рівня": "Level progress", "Торговий акаунт": "Trading account", "Загальний прибуток": "Total profit", "Сигналів": "Signals", "Ризик": "Risk", "Стартовий баланс": "Starting balance", "Ризик на сигнал, %": "Risk per signal, %", "Історія сигналів": "Signal history", "Сигналів поки немає.": "No signals yet.", "Аналітика щоденника": "Journal analytics", "Рух коштів": "Funds movement", "Операцій поки немає.": "No operations yet.", "Найкраща пара": "Best pair", "Найгірша пара": "Worst pair", "Динаміка акаунта": "Account performance", "Це внутрішній облік NOFEAR OPTION. Баланс не є балансом Pocket Option.": "This is NOFEAR OPTION internal tracking. The balance is not your Pocket Option balance.", "Pocket-щоденник": "Pocket Journal", "Додавайте реальні угоди вручну. Статистика особистого кабінету розраховується на основі записів цього щоденника.": "Add real trades manually. Personal account statistics are calculated from this journal.", "Актив": "Asset", "Напрямок": "Direction", "Сума угоди, $": "Trade amount, $", "Результат": "Result", "Дата й час": "Date & time", "Коментар": "Comment", "Чому увійшов, що помітив, помилка/спостереження...": "Why you entered, what you noticed, mistake/observation...", "+ ДОДАТИ УГОДУ": "+ ADD TRADE", "ЗБЕРЕГТИ ЗМІНИ": "SAVE CHANGES", "СКАСУВАТИ РЕДАГУВАННЯ": "CANCEL EDIT", "Коротка аналітика": "Quick analytics", "Історія угод": "Trade history", "Угод поки немає.": "No trades yet.", "Завдання та нагороди": "Tasks & rewards", "Останні нагороди": "Recent rewards", "Завантаження завдань...": "Loading tasks...", "Завдання поки недоступні.": "Tasks are currently unavailable.", "Нагород поки немає.": "No rewards yet.", "ВИКОНАНО": "COMPLETED", "У ПРОЦЕСІ": "IN PROGRESS", "XP за сканування: до 20 XP в день.": "Scan XP: up to 20 XP per day.", "Стартовий баланс, $": "Starting balance, $", "Зростання за день, %": "Daily growth, %", "Кількість днів": "Number of days", "Ризик на угоду, %": "Risk per trade, %", "РОЗРАХУВАТИ": "CALCULATE", "Підсумковий баланс": "Final balance", "Прогноз зростання": "Growth forecast", "Розбивка за днями": "Daily breakdown", "День": "Day", "Поч. баланс": "Start balance", "Прибуток дня": "Daily profit", "Кін. баланс": "End balance", "Пошук активу...": "Search asset...", "СКАНУВАННЯ РИНКУ...": "SCANNING MARKET...", "Підключення до потоку котирувань...": "Connecting to quote stream...", "Фільтрація ринкового шуму...": "Filtering market noise...", "Зчитування RSI та MACD...": "Reading RSI and MACD...", "Оцінка імпульсу та волатильності...": "Evaluating momentum and volatility...", "Формування сигналу...": "Generating signal...", "СИГНАЛ ЗА АКТИВОМ": "ASSET SIGNAL", "ВГОРУ (CALL)": "UP (CALL)", "ВНИЗ (PUT)": "DOWN (PUT)", "НЕМАЄ СИГНАЛУ": "NO SIGNAL", "ЙМОВІРНІСТЬ": "PROBABILITY", "СИЛА": "STRENGTH", "ЕКСПІРАЦІЯ": "EXPIRY", "Середня": "Medium", "Сильна": "Strong", "Слабка": "Weak", "Сканувань": "Scans", "Середня точність": "Average accuracy", "LIVE-ДАШБОРД ТЕХ. АНАЛІЗУ": "LIVE TECHNICAL ANALYSIS DASHBOARD", "Сила тренду": "Trend strength", "Волатильність": "Volatility", "Нейтрально": "Neutral", "Бичачий": "Bullish", "Ведмежий": "Bearish", "Купувати": "Buy", "Продавати": "Sell", "Перекуплений": "Overbought", "Перепроданий": "Oversold", "Напишіть повідомлення...": "Type a message...", "Повідомлення прийнято. У цій демонстраційній версії чат працює локально; підключення реального оператора або Telegram-діалогу додамо на серверній частині.": "Message received. In this demo version the chat works locally; a real operator or Telegram chat can be connected on the server side.", "У РОЗРОБЦІ": "IN DEVELOPMENT", "Структурні пробої ринку": "Market structure breaks", "Стратегія «Три свічки»": "Three Candles Strategy", "Модель входу за імпульсом": "Momentum entry model", "Правила мані-менеджменту": "Money management rules", "Система захисту капіталу": "Capital protection system", "ПРОСУНУТИЙ": "ADVANCED", "СЕРЕДНІЙ": "INTERMEDIATE", "ОБОВ'ЯЗКОВИЙ": "ESSENTIAL", "уроків": "lessons", "Зрозуміло": "Got it", "Нових сповіщень немає": "No new notifications", "Баланс збережено": "Balance saved", "Введіть коректний баланс": "Enter a valid balance", "Помилка збереження": "Save error", "Ризик збережено": "Risk saved", "Ризик: від 0.1% до 10%": "Risk: from 0.1% to 10%", "Помилка збереження ризику": "Risk save error", "Введіть суму угоди": "Enter trade amount", "Угоду додано": "Trade added", "Угоду оновлено": "Trade updated", "Угоду видалено": "Trade deleted", "Помилка видалення": "Delete error", "Видалити цю угоду зі щоденника?": "Delete this trade from the journal?", "Помилка авторизації": "Authorization error", "Некоректна відповідь API": "Invalid API response", "Запит...": "Request...", "Очікує результату": "Awaiting result", "Досягнуто максимального рівня": "Maximum level reached", "Нагорода XP": "XP Reward", "Прогрес профілю оновлено": "Profile progress updated", "Сильний": "Strong", "Помірний": "Moderate", "Слабкий": "Weak", "висхідний": "uptrend", "низхідний": "downtrend", "⚡ АНАЛІЗУЮ...": "⚡ ANALYZING...", "⚡ ПОВТОРИТИ АНАЛІЗ": "⚡ ANALYZE AGAIN", "⚡ ПОВТОРИТИ": "⚡ RETRY", "Опануйте структуру ринку, визначаючи Break of Structure (BOS) та Change of Character (CHoCH) — основу читання цінового руху.": "Master market structure by identifying Break of Structure (BOS) and Change of Character (CHoCH), the foundation of reading price action.", "Імпульсна стратегія на основі трьох послідовних закриттів свічок — для таймфреймів M1 та M5 із правилами підтвердження.": "A momentum strategy based on three consecutive candle closes, for M1 and M5 with confirmation rules.", "Правила ризику, розміру позиції та денних лімітів просадки. Базова навичка, що відділяє системну торгівлю від гри.": "Rules for risk, position sizing, and daily drawdown limits. A core skill that separates systematic trading from gambling.", "🏅 Доступ до VIP-академії": "🏅 VIP Academy Access", "Опануйте ринки з": "Master the markets with", "перевіреними стратегіями": "proven strategies", "Структурована програма з прайс-екшену, імпульсних моделей і мані-менеджменту для дисциплінованої торгівлі.": "A structured program in price action, momentum models, and money management for disciplined trading.", "Курси": "Courses", "30 хв": "30 min", "Читання": "Reading", "Точність": "Accuracy", "БІБЛІОТЕКА СТРАТЕГІЙ": "STRATEGY LIBRARY", "◷ 12 хв　▣ 4 уроки": "◷ 12 min　▣ 4 lessons", "◷ 8 хв　▣ 3 уроки": "◷ 8 min　▣ 3 lessons", "◷ 10 хв　▣ 5 уроків": "◷ 10 min　▣ 5 lessons", "Читати ›": "Read ›", "ПОРАДИ ДНЯ": "DAILY TIPS", "Не ризикуйте більш ніж 2% балансу на одну угоду.": "Do not risk more than 2% of your balance on a single trade.", "Чекайте на підтверджувальні свічки. Вхід за однією тінню — це гра, а не торгівля.": "Wait for confirming candles. Entering on a single wick is gambling, not trading.", "Записуйте угоди в щоденник і аналізуйте власні дані.": "Log trades in your journal and analyze your own data.", "Уникайте важливих новинних релізів без новинної стратегії.": "Avoid major news releases unless you have a news-trading strategy.", "Встановіть денний ліміт втрат і дотримуйтеся його без винятків.": "Set a daily loss limit and follow it without exceptions.", "Якщо M1 неясний, перемкніться на M5 або M15 для контексту.": "If M1 is unclear, switch to M5 or M15 for context.", "УГОД СЬОГОДНІ": "TRADES TODAY", "ТЕРМІНАЛ ШІ-АНАЛІЗУ · POCKET OPTION": "AI ANALYSIS TERMINAL · POCKET OPTION", "ВИБІР АКТИВУ": "SELECT ASSET", "ТАЙМФРЕЙМ": "TIMEFRAME", "Очікування": "WAITING", "Нейтральний": "Neutral", "⚡ АНАЛІЗ ШІ": "⚡ AI ANALYSIS", "1 ХВ (M1)": "1 MIN (M1)", "VIP-команда": "VIP Team", "ВЕБ-ЧАТ NOFEAR OPTION": "NOFEAR OPTION WEB CHAT", "Ласкаво просимо до VIP-чату NOFEAR OPTION. Тут можна поставити запитання щодо роботи термінала та стратегій.": "Welcome to the NOFEAR OPTION VIP chat. Here you can ask questions about the terminal and strategies.", "Калькулятор зростання": "Growth Calculator", "Підключення Telegram-акаунта...": "Connecting Telegram account...", "XP за сканування: до 20 XP на день.": "Scan XP: up to 20 XP per day.", "NOFEAR OPTION • інтерактивний Mini App": "NOFEAR OPTION • Interactive Mini App", "ТОРГОВІ СИГНАЛИ": "TRADING SIGNALS", "Трейдер 👑": "Trader 👑", "↗ Сила тренду": "↗ Trend Strength", "▥ Волатильність": "▥ Volatility", "ONLINE": "ONLINE", "ERROR": "ERROR"};
 const BACKEND_I18N = {"Ежедневный вход": ["Щоденний вхід", "Daily login"], "Сканирование рынка": ["Сканування ринку", "Market scan"], "Запись в дневнике": ["Запис у щоденнику", "Journal entry"], "Выигрышная сделка": ["Виграшна угода", "Winning trade"], "3 дня подряд": ["3 дні поспіль", "3-day streak"], "7 дней подряд": ["7 днів поспіль", "7-day streak"], "5 анализов за день": ["5 аналізів за день", "5 analyses in a day"], "5 записей в дневнике": ["5 записів у щоденнику", "5 journal entries"], "3 WIN подряд": ["3 WIN поспіль", "3 WIN streak"], "5 WIN подряд": ["5 WIN поспіль", "5 WIN streak"], "Дневник 7 разных дней": ["Щоденник 7 різних днів", "Journal on 7 different days"], "50 сделок в дневнике": ["50 угод у щоденнику", "50 journal trades"], "100 сделок в дневнике": ["100 угод у щоденнику", "100 journal trades"], "Пройти все 3 урока": ["Пройти всі 3 уроки", "Complete all 3 lessons"], "Урок: BOS / CHoCH": ["Урок: BOS / CHoCH", "Lesson: BOS / CHoCH"], "Урок: Три свечи": ["Урок: Три свічки", "Lesson: Three Candles"], "Урок: Мани-менеджмент": ["Урок: Мані-менеджмент", "Lesson: Money Management"], "Зайти в приложение сегодня": ["Зайти в застосунок сьогодні", "Open the app today"], "Ежедневная активность": ["Щоденна активність", "Daily activity"], "Открывайте Mini App каждый день": ["Відкривайте Mini App щодня", "Open the Mini App every day"], "Недельная серия входов": ["Серія входів протягом тижня", "7-day login streak"], "5 анализов сегодня": ["5 аналізів сьогодні", "5 analyses today"], "Используйте сканер рынка": ["Використовуйте сканер ринку", "Use the market scanner"], "Фиксируйте реальные сделки": ["Фіксуйте реальні угоди", "Log real trades"], "Серия по данным дневника": ["Серія за даними щоденника", "Streak based on journal data"], "Продвинутая серия побед": ["Просунута серія перемог", "Advanced winning streak"], "Вести дневник 7 дней": ["Вести щоденник 7 днів", "Keep a journal for 7 days"], "Записи в 7 разных календарных дней": ["Записи у 7 різних календарних днях", "Entries on 7 different calendar days"], "Большая статистическая выборка": ["Велика статистична вибірка", "Larger statistical sample"], "Дисциплина и системность": ["Дисципліна та системність", "Discipline and consistency"], "Пройти 3 урока": ["Пройти 3 уроки", "Complete 3 lessons"], "Откройте все материалы обучения": ["Відкрийте всі навчальні матеріали", "Open all training materials"], "Коррекция баланса": ["Корекція балансу", "Balance adjustment"], "Стартовый баланс": ["Стартовий баланс", "Starting balance"]};
 let currentLanguage = localStorage.getItem("nofear_language") || "uk";
 if(!["uk","en"].includes(currentLanguage)) currentLanguage="uk";
@@ -620,6 +620,13 @@ function applyLanguage(lang, persist=true){
 
   // Re-render dynamic profile/task data with the selected language.
   if(window.__lastVipPayload) renderVipProfile(window.__lastVipPayload);
+  if(window.__lastSignalDir) dash(window.__lastSignalDir);
+
+  const vol=document.getElementById("volText");
+  if(vol) vol.textContent=currentLanguage==="en"?"Medium":"Середня";
+
+  const api=document.getElementById("apiState");
+  if(api && api.textContent){ api.textContent=uiText(api.textContent); }
 }
 
 document.querySelectorAll(".lang-btn").forEach(btn=>btn.addEventListener("click",()=>applyLanguage(btn.dataset.lang)));
@@ -644,7 +651,10 @@ function showXpReward(reward){
   const next=()=>{
     if(!xpQueue.length){xpToastBusy=false;return;} xpToastBusy=true;
     const r=xpQueue.shift(), el=document.getElementById("xpToast");
-    document.getElementById("xpToastTitle").textContent="Нагорода: "+(r.title||"XP");
+    const rewardTitle=backendText(r.title||"XP");
+    document.getElementById("xpToastTitle").textContent=(currentLanguage==="en"?"Reward: ":"Нагорода: ")+rewardTitle;
+    const sub=document.getElementById("xpToastSub");
+    if(sub) sub.textContent=currentLanguage==="en"?"Profile progress updated":"Прогрес профілю оновлено";
     document.getElementById("xpToastAmount").textContent="+"+r.amount+" XP";
     el.classList.add("show");
     setTimeout(()=>{el.classList.remove("show");setTimeout(next,320)},2400);
@@ -706,11 +716,29 @@ let scanCount=0,callCount=0,putCount=0,accs=[];
 const API_URL = "https://gladly-uninsured-flanked.ngrok-free.dev";
 
 const analyze=document.getElementById("analyzeBtn"),scanBox=document.getElementById("scanBox"),resultBox=document.getElementById("resultBox"),progress=document.getElementById("progressBar");
-const statuses=["Підключення до потоку котирувань...","Зчитування RSI та MACD...","Оцінка імпульсу та волатильності...","Фільтрація ринкового шуму...","Формування сигналу..."];
-function dash(dir){let pos=dir==="CALL"?70+Math.random()*18:8+Math.random()*18;document.getElementById("trendMarker").style.left=pos+"%";let tt=document.getElementById("trendText"),r=document.getElementById("rsiText"),m=document.getElementById("macdText");tt.textContent=dir==="CALL"?"Купувати":"Продавати";tt.style.color=dir==="CALL"?"var(--green)":"var(--red)";r.textContent=dir==="CALL"?"Перепроданий":"Перекуплений";r.style.color=dir==="CALL"?"var(--green)":"var(--red)";m.textContent=dir==="CALL"?"Бичачий":"Ведмежий";m.style.color=dir==="CALL"?"var(--green)":"var(--red)"}
+const statusesUk=["Підключення до потоку котирувань...","Фільтрація ринкового шуму...","Зчитування RSI та MACD...","Оцінка імпульсу та волатильності...","Формування сигналу..."];
+const statusesEn=["Connecting to quote stream...","Filtering market noise...","Reading RSI and MACD...","Evaluating momentum and volatility...","Generating signal..."];
+function dash(dir){
+  window.__lastSignalDir=dir;
+  const pos=dir==="CALL"?70+Math.random()*18:8+Math.random()*18;
+  document.getElementById("trendMarker").style.left=pos+"%";
+  const tt=document.getElementById("trendText"), r=document.getElementById("rsiText"), m=document.getElementById("macdText");
+  if(currentLanguage==="en"){
+    tt.textContent=dir==="CALL"?"Buy":"Sell";
+    r.textContent=dir==="CALL"?"Oversold":"Overbought";
+    m.textContent=dir==="CALL"?"Bullish":"Bearish";
+  }else{
+    tt.textContent=dir==="CALL"?"Купувати":"Продавати";
+    r.textContent=dir==="CALL"?"Перепроданий":"Перекуплений";
+    m.textContent=dir==="CALL"?"Бичачий":"Ведмежий";
+  }
+  tt.style.color=dir==="CALL"?"var(--green)":"var(--red)";
+  r.style.color=dir==="CALL"?"var(--green)":"var(--red)";
+  m.style.color=dir==="CALL"?"var(--green)":"var(--red)";
+}
 analyze.onclick=async()=>{
   analyze.disabled=true;
-  analyze.textContent="⚡ АНАЛІЗУЮ...";
+  analyze.textContent=currentLanguage==="en"?"⚡ ANALYZING...":"⚡ АНАЛІЗУЮ...";
   resultBox.style.display="none";
   scanBox.style.display="block";
   progress.style.width="0";
@@ -718,6 +746,7 @@ analyze.onclick=async()=>{
   document.getElementById("apiState").style.color="var(--gold2)";
 
   const scanAnimation=(async()=>{
+    const statuses=currentLanguage==="en"?statusesEn:statusesUk;
     for(let i=0;i<statuses.length;i++){
       document.getElementById("scanStatus").textContent=statuses[i];
       progress.style.width=(i+1)*20+"%";
@@ -762,23 +791,23 @@ analyze.onclick=async()=>{
 
     if(dir==="CALL"){
       ar.textContent="↑"; ar.style.color="var(--green)";
-      st.textContent="ВГОРУ (CALL)"; st.style.color="var(--green)";
+      st.textContent=currentLanguage==="en"?"UP (CALL)":"ВГОРУ (CALL)"; st.style.color="var(--green)";
       sb.style.background="rgba(20,71,49,.32)";
       sb.style.borderColor="rgba(39,209,127,.45)";
     }else if(dir==="PUT"){
       ar.textContent="↓"; ar.style.color="var(--red)";
-      st.textContent="ВНИЗ (PUT)"; st.style.color="var(--red)";
+      st.textContent=currentLanguage==="en"?"DOWN (PUT)":"ВНИЗ (PUT)"; st.style.color="var(--red)";
       sb.style.background="rgba(85,26,28,.34)";
       sb.style.borderColor="rgba(255,77,79,.45)";
     }else{
       ar.textContent="•"; ar.style.color="var(--gold2)";
-      st.textContent="НЕМАЄ СИГНАЛУ"; st.style.color="var(--gold2)";
+      st.textContent=currentLanguage==="en"?"NO SIGNAL":"НЕМАЄ СИГНАЛУ"; st.style.color="var(--gold2)";
       sb.style.background="rgba(70,55,20,.28)";
       sb.style.borderColor="rgba(243,184,63,.45)";
     }
 
     document.getElementById("probability").textContent=prob+"%";
-    document.getElementById("strength").textContent=prob>=88?"Сильна":prob>=70?"Середня":"Слабка";
+    document.getElementById("strength").textContent=currentLanguage==="en"?(prob>=88?"Strong":prob>=70?"Medium":"Weak"):(prob>=88?"Сильна":prob>=70?"Середня":"Слабка");
 
     document.getElementById("scanCount").textContent=scanCount;
     document.getElementById("callCount").textContent=callCount;
@@ -793,13 +822,13 @@ analyze.onclick=async()=>{
     document.getElementById("apiState").textContent=uiText("ONLINE");
     document.getElementById("apiState").style.color="var(--green)";
     resultBox.style.display="block";
-    analyze.textContent="⚡ ПОВТОРИТИ АНАЛІЗ";
+    analyze.textContent=currentLanguage==="en"?"⚡ ANALYZE AGAIN":"⚡ ПОВТОРИТИ АНАЛІЗ";
   }catch(err){
     await scanAnimation;
     document.getElementById("apiState").textContent=uiText("ERROR");
     document.getElementById("apiState").style.color="var(--red)";
-    showToast("Помилка аналізу: "+err.message);
-    analyze.textContent="⚡ ПОВТОРИТИ";
+    showToast((currentLanguage==="en"?"Analysis error: ":"Помилка аналізу: ")+err.message);
+    analyze.textContent=currentLanguage==="en"?"⚡ RETRY":"⚡ ПОВТОРИТИ";
   }finally{
     scanBox.style.display="none";
     analyze.disabled=false;
@@ -978,7 +1007,12 @@ function renderXpTasks(data){
   if(!box) return;
   const tasks=data.tasks||[];
   const cap=document.getElementById("scanXpCapNote");
-  if(cap) cap.textContent=`XP за сканирование сегодня: ${Number(data.scan_xp_today||0)} / ${Number(data.scan_xp_daily_cap||20)} XP. После лимита анализы продолжают работать, но XP за них не начисляется.`;
+  if(cap){
+    const used=Number(data.scan_xp_today||0), max=Number(data.scan_xp_daily_cap||20);
+    cap.textContent=currentLanguage==="en"
+      ?`XP for scans today: ${used} / ${max} XP. After reaching the limit, analyses continue to work, but no additional XP is awarded.`
+      :`XP за сканування сьогодні: ${used} / ${max} XP. Після досягнення ліміту аналізи продовжують працювати, але XP за них більше не нараховується.`;
+  }
   box.innerHTML=tasks.length?tasks.map(t=>{
     const p=Number(t.progress||0),target=Math.max(1,Number(t.target||1)),pct=Math.min(100,p/target*100);
     return `<div class="task-card ${t.completed?"done":""}">
